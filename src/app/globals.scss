@@ -1,0 +1,35 @@
+/* stylelint-disable unknownAtRules */
+
+/* 1. Import de ton architecture Sass (obligatoirement en premier) */
+@use "../styles/main";
+
+/* 2. Import Tailwind */
+@import "tailwindcss";
+
+/* 3. Variables CSS globales */
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+/* 4. Mode sombre */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+/* 5. Styles globaux */
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
