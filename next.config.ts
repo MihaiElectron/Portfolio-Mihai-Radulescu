@@ -1,8 +1,14 @@
-import type { NextConfig } from "next";
-
-const nextConfig: NextConfig = {
-  /* config options here */
+/** @type {import('next').NextConfig} */
+const nextConfig = {
   reactCompiler: true,
+
+  images: {
+    domains: [
+      "ghchart.rshah.org",
+      "github-readme-streak-stats.herokuapp.com",
+      "github-readme-activity-graph.vercel.app"
+    ],
+  },
 };
 
 export default nextConfig;
