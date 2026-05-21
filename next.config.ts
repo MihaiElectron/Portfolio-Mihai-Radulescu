@@ -1,14 +1,21 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactCompiler: true,
-
   images: {
-    domains: [
-      "ghchart.rshah.org",
-      "github-readme-streak-stats.herokuapp.com",
-      "github-readme-activity-graph.vercel.app"
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "ghchart.rshah.org",
+      },
+      {
+        protocol: "https",
+        hostname: "github-readme-streak-stats.herokuapp.com",
+      },
+      {
+        protocol: "https",
+        hostname: "github-readme-activity-graph.vercel.app",
+      },
     ],
   },
 };
 
-export default nextConfig;
+module.exports = nextConfig;
