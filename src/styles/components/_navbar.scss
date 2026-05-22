@@ -7,8 +7,8 @@
   padding: 8px 18px;
   line-height: 1;
   font-size: abs.$fs-xs;
-  font-weight: abs.$font-thin;
-  letter-spacing: 3.6px;
+  font-weight: abs.$font-light;
+  letter-spacing: abs.$ls-wider;
   background-color: abs.$color-primary-background;
 
   &__left {

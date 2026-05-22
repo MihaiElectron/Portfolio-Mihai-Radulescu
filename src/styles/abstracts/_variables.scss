@@ -1,11 +1,15 @@
 // Variables SCSS
 
-// Format: HEX
-
-// Base
+// -----------------------------
+// COLORS
+// -----------------------------
 $color-primary-background: #070e16;
 $color-secondary-background: #000204;
-$color-text: #e7d3b2;
+$color-text: #a59a87;
+
+$color-grid: rgba(255, 255, 255, 0.027);
+$color-success: #2d8f59;
+
 
 
 // Text
@@ -30,9 +34,9 @@ $fs-sm: 0.85rem;
 $fs-md: 1rem;
 $fs-lg: 1.25rem;
 $fs-xl: 1.5rem;
-$fs-xxl: 2rem;
+$fs-xxl: 6rem;
 
 // Espacements typographiques
 $ls-normal: 0;
 $ls-wide: 1px;
-$ls-wider: 2px;
+$ls-wider: 3.6px;

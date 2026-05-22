@@ -1,4 +1,6 @@
 import Image from "next/image";
+import Hero from "@/components/Hero/Hero";
+
 import type { Project } from "@/types/project";
 
 
@@ -24,6 +26,8 @@ export default async function Home() {
   return (
     <main>
 
+      <Hero />
+
       {/* ---------------------------------------------------------
          SECTION PROJETS GITHUB
          --------------------------------------------------------- */}
@@ -43,7 +47,7 @@ export default async function Home() {
       {/* ---------------------------------------------------------
          SECTION ACTIVITÉ GITHUB
          ---------------------------------------------------------
-         ⚠️ IMPORTANT : Next.js optimise automatiquement les images.
+         IMPORTANT : Next.js optimise automatiquement les images.
          Mais les images GitHub (graphes, stats, charts) ne sont PAS
          des fichiers statiques → optimisation impossible → erreur 400.
 

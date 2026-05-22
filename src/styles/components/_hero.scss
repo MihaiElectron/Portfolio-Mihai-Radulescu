@@ -1,0 +1,68 @@
+@use "../abstracts" as abs;
+
+.hero {
+  background-color: abs.$color-primary-background;
+
+  // quadrillage fin
+  background-image:
+    linear-gradient(abs.$color-grid 1px, transparent 1px),
+    linear-gradient(90deg, abs.$color-grid 1px, transparent 1px);
+  background-size: 10mm 10mm;
+  background-repeat: repeat;
+
+  border-top: 1px solid abs.$color-grid;
+  border-bottom: 1px solid abs.$color-grid;
+
+  padding: 80px 0;
+  color: abs.$color-text;
+
+  &__content {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  &__flight {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: abs.$fs-xs;
+    font-weight: abs.$font-light;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  &__flight-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: abs.$color-success;
+    animation: hero-dot-blink 2s ease-in-out infinite;
+  }
+
+  &__welcome {
+    font-size: abs.$fs-xxl;
+    color: abs.$color-title;
+    text-transform: uppercase;
+    line-height: 1.1;
+    margin-bottom: 24px;
+  }
+
+  &__terminal {
+    color: abs.$color-title-amber;
+  }
+
+  &__description {
+    font-size: abs.$fs-md;
+    font-weight: abs.$font-thin;
+    line-height: 1.6;
+    max-width: 650px;
+  }
+}
+
+@keyframes hero-dot-blink {
+  0%   { opacity: 1; }
+  50%  { opacity: 0.25; }
+  100% { opacity: 1; }
+}
