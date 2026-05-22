@@ -2,3 +2,8 @@
 @use 'base';
 @use 'layout';
 @use 'components';
+
+body {
+  background-color: abs.$color-primary-background;
+  font-family: abs.$font-mono;
+}

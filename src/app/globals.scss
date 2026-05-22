@@ -3,10 +3,8 @@
 /* 1. Import de ton architecture Sass (obligatoirement en premier) */
 @use "../styles/main";
 
-/* 2. Import Tailwind */
-@import "tailwindcss";
 
-/* 3. Variables CSS globales */
+/* 2. Variables CSS globales */
 :root {
   --background: #ffffff;
   --foreground: #171717;
