@@ -1,6 +1,7 @@
 @use "../abstracts" as abs;
 
 .hero {
+  margin: 0;
   background-color: abs.$color-primary-background;
 
   // quadrillage fin
@@ -17,12 +18,35 @@
   color: abs.$color-text;
 
   &__content {
-    max-width: 900px;
+    max-width: 1100px;
     margin: 0 auto;
-    padding: 0 24px;
+    padding: 0px;
+  }
+
+  &__layout {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    gap: 64px;
+    
+
+    @media screen and (max-width: 900px) {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+
+  &__left {
+    flex: 1;
+  }
+
+  &__right {
+    display: flex;
+    justify-content: flex-end;
   }
 
   &__flight {
+    margin-top: 0;
     display: flex;
     align-items: center;
     gap: 8px;
@@ -30,7 +54,6 @@
     font-weight: abs.$font-light;
     letter-spacing: 2px;
     text-transform: uppercase;
-    margin-bottom: 16px;
   }
 
   &__flight-dot {
@@ -42,11 +65,14 @@
   }
 
   &__welcome {
+    margin-top: 0;
+    margin-bottom: 0px;
     font-size: abs.$fs-xxl;
+    font-weight: abs.$font-semibold;
     color: abs.$color-title;
     text-transform: uppercase;
     line-height: 1.1;
-    margin-bottom: 24px;
+    margin-bottom: 4px;
   }
 
   &__terminal {
@@ -55,14 +81,22 @@
 
   &__description {
     font-size: abs.$fs-md;
-    font-weight: abs.$font-thin;
+    font-weight: abs.$font-extralight;
     line-height: 1.6;
     max-width: 650px;
   }
 }
 
 @keyframes hero-dot-blink {
-  0%   { opacity: 1; }
-  50%  { opacity: 0.25; }
-  100% { opacity: 1; }
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.25;
+  }
+
+  100% {
+    opacity: 1;
+  }
 }

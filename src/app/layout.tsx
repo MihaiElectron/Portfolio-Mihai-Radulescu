@@ -1,12 +1,21 @@
 import type { Metadata } from "next";
 import "../styles/main.scss";
 import Navbar from "@/components/Navbar/Navbar";
-import { JetBrains_Mono } from "next/font/google";
 
+import { JetBrains_Mono, IBM_Plex_Mono } from "next/font/google";
+
+// JetBrains Mono
 const jetbrains = JetBrains_Mono({
   subsets: ["latin"],
-  weight: ["100", "200", "300", "400", "500"],
+  weight: ["100", "200", "300", "400", "500", "600", "700"],
   variable: "--font-jetbrains",
+});
+
+// IBM Plex Mono (toutes les weights)
+const plexMono = IBM_Plex_Mono({
+  subsets: ["latin"],
+  weight: ["100", "200", "300", "400", "500", "600", "700"],
+  variable: "--font-plexmono",
 });
 
 export const metadata: Metadata = {
@@ -16,7 +25,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="fr" className={jetbrains.variable}>
+    <html lang="fr" className={`${jetbrains.variable} ${plexMono.variable}`}>
       <body>
         <Navbar />
         {children}
