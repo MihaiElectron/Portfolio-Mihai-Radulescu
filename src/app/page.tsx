@@ -9,6 +9,7 @@ import Footer from "@/components/Footer/Footer";
 import { technologies } from "@/data/technologies";
 
 import type { Project } from "@/types/project";
+import type { GithubStatus } from "@/types/github-status";
 
 async function getProjects(): Promise<Project[]> {
   const res = await fetch("http://localhost:3000/api/projects", {
@@ -23,7 +24,14 @@ async function getProjects(): Promise<Project[]> {
 }
 
 export default async function Home() {
-  const projects = await getProjects();
+  let projects: Project[] = [];
+  let githubStatus: GithubStatus = "OPERATIONAL";
+
+  try {
+    projects = await getProjects();
+  } catch {
+    githubStatus = "DOWN";
+  }
 
   const stats = {
     projectsCompleted: projects.length,
@@ -35,10 +43,10 @@ export default async function Home() {
       <Hero />
       <Departures />
       <CheckIn stats={stats} />
-      <Destinations projects={projects} />
+      <Destinations projects={projects} githubStatus={githubStatus} />
       <GithubActivity />
       <FinalCall />
-      <Footer />
+      <Footer githubStatus={githubStatus} />
     </main>
   );
 }

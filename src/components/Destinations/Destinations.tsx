@@ -1,9 +1,14 @@
 import type { Project } from "../../types/project";
-
 import DestinationCard from "./DestinationCard";
+import type { GithubStatus } from "../../types/github-status";
 
 interface DestinationsProps {
   projects: Project[];
+}
+
+interface DestinationsProps {
+  projects: Project[];
+  githubStatus: GithubStatus;
 }
 
 export default function Destinations({

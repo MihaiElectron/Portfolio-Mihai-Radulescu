@@ -54,7 +54,13 @@
   }
 
   &__status {
-    color: abs.$color-success;
+    &--operational {
+      color: abs.$color-success;
+    }
+
+    &--down {
+      color: #e8643c;
+    }
   }
 
   @media screen and (max-width: 900px) {

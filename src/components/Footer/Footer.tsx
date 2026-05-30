@@ -1,6 +1,11 @@
 import { profile } from "../../data/profile";
+import type { GithubStatus } from "../../types/github-status";
 
-export default function Footer() {
+interface FooterProps {
+  githubStatus: GithubStatus;
+}
+
+export default function Footer({ githubStatus }: FooterProps) {
   const currentYear = new Date().getFullYear();
 
   return (
@@ -11,8 +16,8 @@ export default function Footer() {
         </p>
 
         <div className="footer__infos">
-        <span>IATA · {profile.iataCode}</span>
-        <span>ICAO · {profile.icaoCode}</span>
+          <span>IATA · {profile.iataCode}</span>
+          <span>ICAO · {profile.icaoCode}</span>
 
           <a
             href={profile.githubUrl}
@@ -23,8 +28,13 @@ export default function Footer() {
             GITHUB
           </a>
 
-          <span className="footer__status">
-            ● SYSTÈME OPÉRATIONNEL
+          <span
+            className={`footer__status footer__status--${githubStatus.toLowerCase()}`}
+          >
+            ●{" "}
+            {githubStatus === "OPERATIONAL"
+              ? "SYSTÈME OPÉRATIONNEL"
+              : "SYSTÈME INDISPONIBLE"}
           </span>
         </div>
       </div>
