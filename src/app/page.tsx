@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Hero from "@/components/Hero/Hero";
+import Departures from "@/components/Departures/Departures";
 
 import type { Project } from "@/types/project";
 
@@ -27,6 +28,7 @@ export default async function Home() {
     <main>
 
       <Hero />
+      <Departures />
 
       {/* ---------------------------------------------------------
          SECTION PROJETS GITHUB

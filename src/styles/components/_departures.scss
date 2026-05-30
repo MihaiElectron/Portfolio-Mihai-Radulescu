@@ -1,0 +1,134 @@
+@use "../abstracts" as abs;
+
+.departures {
+  padding: 80px 0;
+  background-color: abs.$color-primary-background;
+  color: abs.$color-text;
+
+  &__content {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0;
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 32px;
+    margin-bottom: 32px;
+  }
+
+  &__eyebrow,
+  &__meta {
+    font-family: abs.$font-plexmono;
+    font-size: abs.$fs-xs;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: abs.$color-text;
+    opacity: 0.7;
+  }
+
+  &__title {
+    margin: 8px 0 0;
+
+    font-family: abs.$font-plexmono;
+    font-size: 3rem;
+    font-weight: abs.$mono-semibold;
+    line-height: 1;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+
+    color: abs.$color-title;
+  }
+
+  &__table {
+    border: 1px solid abs.$color-borders;
+    background-color: abs.$color-secondary-background;
+  }
+
+  &__row {
+    display: grid;
+    grid-template-columns: 110px minmax(0, 1fr) 90px 100px 120px;
+    align-items: center;
+    gap: 16px;
+
+    padding: 22px 24px;
+
+    border-bottom: 1px dashed abs.$color-grid;
+
+    font-family: abs.$font-plexmono;
+    color: abs.$color-title-amber;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    &--head {
+      padding: 14px 24px;
+
+      font-size: 0.7rem;
+      letter-spacing: 4px;
+      color: abs.$color-title-amber;
+      opacity: 0.75;
+    }
+  }
+
+  &__flight {
+    font-size: abs.$fs-lg;
+    text-shadow: 0 0 6px rgba(249, 170, 10, 0.35);
+  }
+
+  &__destination {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+
+    span {
+      font-size: abs.$fs-xl;
+      text-transform: uppercase;
+      text-shadow: 0 0 6px rgba(249, 170, 10, 0.35);
+    }
+
+    small {
+      font-size: 0.7rem;
+      letter-spacing: 3px;
+      color: abs.$color-title-amber;
+      opacity: 0.55;
+    }
+  }
+
+  &__status {
+    font-size: abs.$fs-sm;
+    font-weight: abs.$mono-bold;
+    text-align: right;
+
+    &--boarding,
+    &--gate-open {
+      color: abs.$color-success;
+    }
+
+    &--on-time {
+      color: abs.$color-title-amber;
+    }
+
+    &--delayed {
+      color: #ff2f5f;
+    }
+  }
+
+  @media screen and (max-width: 900px) {
+    &__header {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    &__table {
+      overflow-x: auto;
+    }
+
+    &__row {
+      min-width: 850px;
+    }
+  }
+}
