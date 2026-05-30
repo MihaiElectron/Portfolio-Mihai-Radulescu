@@ -1,4 +1,6 @@
-import Image from "next/image";
+"use client";
+
+import { GitHubCalendar } from "react-github-calendar";
 
 export default function GithubActivity() {
   return (
@@ -16,26 +18,17 @@ export default function GithubActivity() {
           <p className="github-activity__meta">RADAR · CONTRIBUTIONS</p>
         </div>
 
-        <div className="github-activity__charts">
-          <div className="github-activity__chart">
-            <Image
-              src="https://ghchart.rshah.org/MihaiElectron"
-              alt="Activité GitHub"
-              width={800}
-              height={200}
-              unoptimized
-            />
-          </div>
-
-          <div className="github-activity__chart">
-            <Image
-              src="https://github-readme-activity-graph.vercel.app/graph?username=MihaiElectron&theme=react-dark"
-              alt="Graph activité GitHub"
-              width={900}
-              height={300}
-              unoptimized
-            />
-          </div>
+        <div className="github-activity__calendar">
+          <GitHubCalendar
+            username="MihaiElectron"
+            colorScheme="dark"
+            blockSize={12}
+            blockMargin={4}
+            fontSize={12}
+            theme={{
+              dark: ["#1b2028", "#143820", "#2d8f59", "#6fcf97", "#f9aa0a"],
+            }}
+          />
         </div>
       </div>
     </section>

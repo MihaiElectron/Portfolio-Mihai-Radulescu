@@ -46,28 +46,41 @@
     color: abs.$color-title;
   }
 
-  &__charts {
-    display: grid;
-    gap: 24px;
-  }
-
-  &__chart {
+  &__calendar {
     padding: 24px;
 
     background-color: abs.$color-secondary-background;
     border: 1px solid abs.$color-borders;
 
-    img {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
+    overflow-x: auto;
+
+    display: flex;
+    justify-content: center;
+  }
+
+  // GitHub Calendar
+  .react-github-calendar {
+    width: 100%;
+  }
+
+  svg {
+    max-width: 100%;
+    height: auto;
+  }
+
+  text {
+    fill: abs.$color-text;
+    font-family: abs.$font-plexmono;
   }
 
   @media screen and (max-width: 900px) {
     &__header {
       flex-direction: column;
       align-items: flex-start;
+    }
+
+    &__calendar {
+      justify-content: flex-start;
     }
   }
 }
