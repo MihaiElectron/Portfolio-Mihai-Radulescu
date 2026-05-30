@@ -4,7 +4,6 @@ export const profile: Profile = {
   name: "Mihai Radulescu",
   departure: "Reconversion",
   destination: "Développeur Web",
-  trainingDuration: "9 mois",
   projectsCompleted: 12,
   technologiesCount: 14,
   careerChangeCount: 1,

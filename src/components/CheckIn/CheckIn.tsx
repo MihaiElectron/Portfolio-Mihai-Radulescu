@@ -78,7 +78,7 @@ export default function CheckIn() {
 
           <div className="check-in__stats">
             <div className="check-in__stat">
-              <strong>{profile.trainingDuration}</strong>
+              <strong>{getTrainingDuration(new Date("2025-09-01"))}</strong>
               <span>FORMATION OC</span>
             </div>
 
