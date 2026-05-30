@@ -1,6 +1,10 @@
 @use "../abstracts" as abs;
 
 .navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -13,6 +17,7 @@
   letter-spacing: abs.$ls-wider;
 
   background-color: abs.$color-primary-background;
+  
 
   &__left {
     display: flex;
