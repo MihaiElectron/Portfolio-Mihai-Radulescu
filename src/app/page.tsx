@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Hero from "@/components/Hero/Hero";
 import Departures from "@/components/Departures/Departures";
+import CheckIn from "@/components/CheckIn/CheckIn";
 
 import type { Project } from "@/types/project";
 
@@ -29,6 +30,7 @@ export default async function Home() {
 
       <Hero />
       <Departures />
+      <CheckIn />
 
       {/* ---------------------------------------------------------
          SECTION PROJETS GITHUB
