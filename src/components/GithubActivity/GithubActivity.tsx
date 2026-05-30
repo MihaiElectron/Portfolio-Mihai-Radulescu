@@ -7,7 +7,7 @@ export default function GithubActivity() {
         <div className="github-activity__header">
           <div>
             <p className="github-activity__eyebrow">
-              SECTION 05 - FLIGHT RADAR
+              SECTION 04 - FLIGHT RADAR
             </p>
 
             <h2 className="github-activity__title">Activité GitHub</h2>

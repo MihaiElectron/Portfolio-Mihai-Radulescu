@@ -13,11 +13,40 @@ export default function Navbar() {
       </div>
 
       <ul className="navbar__menu">
-        <li><Link href="#depart" className="navbar__link">Départs</Link></li>
-        <li><Link href="#checkin" className="navbar__link">Check‑in</Link></li>
-        <li><Link href="#securite" className="navbar__link">Sécurité</Link></li>
-        <li><Link href="#lounge" className="navbar__link">Lounge</Link></li>
-        <li><Link href="#embarquement" className="navbar__link">Embarquement</Link></li>
+        <li>
+          <Link href="#depart" className="navbar__link">
+            <span className="navbar__section">01</span>
+            <span className="navbar__label">Departures</span>
+          </Link>
+        </li>
+
+        <li>
+          <Link href="#check-in" className="navbar__link">
+            <span className="navbar__section">02</span>
+            <span className="navbar__label">Check-In</span>
+          </Link>
+        </li>
+
+        <li>
+          <Link href="#destinations" className="navbar__link">
+            <span className="navbar__section">03</span>
+            <span className="navbar__label">Destinations</span>
+          </Link>
+        </li>
+
+        <li>
+          <Link href="#github-activity" className="navbar__link">
+            <span className="navbar__section">04</span>
+            <span className="navbar__label">Radar</span>
+          </Link>
+        </li>
+
+        <li>
+          <Link href="#contact" className="navbar__link">
+            <span className="navbar__section">05</span>
+            <span className="navbar__label">Final Call</span>
+          </Link>
+        </li>
       </ul>
     </nav>
   );

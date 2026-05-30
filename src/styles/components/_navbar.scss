@@ -4,60 +4,95 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+
   padding: 8px 18px;
+
   line-height: 1;
   font-size: abs.$fs-xs;
   font-weight: abs.$font-light;
   letter-spacing: abs.$ls-wider;
+
   background-color: abs.$color-primary-background;
 
   &__left {
     display: flex;
     align-items: center;
     gap: 10px;
-
   }
 
   &__badge {
     display: flex;
     align-items: center;
     justify-content: center;
+
     width: 32px;
     height: 32px;
+
     background-color: abs.$color-title-amber;
     color: abs.$color-secondary-background;
+
     font-size: abs.$fs-sm;
     font-weight: bold;
     letter-spacing: 1px;
   }
 
-  &__terminal {
-    color: abs.$color-text;
-  }
-
-  &__dot {
-    color: abs.$color-text;
-  }
-
+  &__terminal,
+  &__dot,
   &__title {
     color: abs.$color-text;
   }
 
   &__menu {
     display: flex;
+    align-items: center;
     gap: 32px;
+
+    margin: 0;
+    padding: 0;
+
     list-style: none;
   }
 
   &__link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
     text-transform: uppercase;
     color: abs.$color-text;
     text-decoration: none;
+
     transition: color 0.2s ease;
 
     &:hover {
-      color: abs.$color-text;
+      color: abs.$color-title-amber;
       text-decoration: none;
+    }
+  }
+
+  &__section {
+    color: abs.$color-title-amber;
+    opacity: 0.65;
+  }
+
+  &__label {
+    color: inherit;
+  }
+
+  @media screen and (max-width: 1920px) {
+    &__section {
+      display: none;
+    }
+  }
+
+  @media screen and (max-width: 900px) {
+    align-items: flex-start;
+    gap: 24px;
+
+    &__menu {
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 16px;
     }
   }
 }

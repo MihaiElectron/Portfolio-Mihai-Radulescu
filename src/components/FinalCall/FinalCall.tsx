@@ -8,7 +8,7 @@ export default function FinalCall() {
           <div className="final-call__panel">
             <div className="final-call__left">
               <p className="final-call__eyebrow">
-                FINAL CALL · SECTION 06
+                FINAL CALL · SECTION 05
               </p>
 
               <h2 className="final-call__title">

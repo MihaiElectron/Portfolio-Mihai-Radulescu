@@ -23,7 +23,7 @@ export default function Destinations({
         <div className="destinations__header">
           <div>
             <p className="destinations__eyebrow">
-              SECTION 04 - DESTINATIONS
+              SECTION 03 - DESTINATIONS
             </p>
 
             <h2 className="destinations__title">
