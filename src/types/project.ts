@@ -6,4 +6,5 @@ export interface Project {
   language: string | null;
   topics: string[];
   updated_at: string;
+  status: "done" | "under-process";
 }

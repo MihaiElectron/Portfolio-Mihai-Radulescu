@@ -1,5 +1,7 @@
 import type { Project } from "../../types/project";
 
+import DestinationCard from "./DestinationCard";
+
 interface DestinationsProps {
   projects: Project[];
 }
@@ -30,13 +32,12 @@ export default function Destinations({
         </div>
 
         <div className="destinations__grid">
-          <article className="destinations__placeholder">
-            Future Destination Card
-          </article>
-
-          <article className="destinations__placeholder">
-            Future Destination Card
-          </article>
+          {projects.map((project) => (
+            <DestinationCard
+              key={project.name}
+              project={project}
+            />
+          ))}
         </div>
       </div>
     </section>

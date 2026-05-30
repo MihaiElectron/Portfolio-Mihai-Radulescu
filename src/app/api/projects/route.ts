@@ -2,19 +2,16 @@
 // TYPES : on décrit exactement la structure renvoyée par GitHub
 // -------------------------------------------------------------
 
-// Langage principal du repo
 interface GithubLanguage {
   name: string;
 }
 
-// Topic GitHub
 interface GithubTopic {
   topic: {
     name: string;
   };
 }
 
-// Un repository GitHub (structure GraphQL)
 interface GithubRepository {
   name: string;
   description: string | null;
@@ -29,7 +26,6 @@ interface GithubRepository {
   updatedAt: string;
 }
 
-// Structure de la réponse GraphQL GitHub
 interface GithubResponse {
   data: {
     user: {
@@ -40,7 +36,6 @@ interface GithubResponse {
   };
 }
 
-// Structure du repo filtré (ce que tu renvoies à ton front)
 interface Project {
   name: string;
   description: string | null;
@@ -49,8 +44,8 @@ interface Project {
   language: string | null;
   topics: string[];
   updated_at: string;
+  status: "done" | "under-process";
 }
-
 
 // -------------------------------------------------------------
 // API ROUTE
@@ -97,24 +92,36 @@ export async function GET() {
       body: JSON.stringify({ query }),
     });
 
-    // On typpe ici la réponse JSON
     const json: GithubResponse = await res.json();
 
     const repos = json.data.user.repositories.nodes;
 
-    // On typpe ici le résultat final
-    const filtered: Project[] = repos.map((repo) => ({
-      name: repo.name,
-      description: repo.description,
-      url: repo.url,
-      stars: repo.stargazerCount,
-      language: repo.languages.nodes[0]?.name ?? null,
-      topics: repo.repositoryTopics.nodes.map((t) => t.topic.name),
-      updated_at: repo.updatedAt,
-    }));
+    const filtered: Project[] = repos.map((repo) => {
+      const topics = repo.repositoryTopics.nodes.map((t) => t.topic.name);
+
+      let status: Project["status"] = "under-process";
+
+      if (topics.includes("status-done")) {
+        status = "done";
+      }
+
+      if (topics.includes("status-in-progress")) {
+        status = "under-process";
+      }
+
+      return {
+        name: repo.name,
+        description: repo.description,
+        url: repo.url,
+        stars: repo.stargazerCount,
+        language: repo.languages.nodes[0]?.name ?? null,
+        topics,
+        updated_at: repo.updatedAt,
+        status,
+      };
+    });
 
     return Response.json(filtered);
-
   } catch (error) {
     return Response.json(
       { error: "Internal server error", details: String(error) },
