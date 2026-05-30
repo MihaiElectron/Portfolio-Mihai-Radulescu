@@ -1,9 +1,8 @@
-import Image from "next/image";
-
 import Hero from "@/components/Hero/Hero";
 import Departures from "@/components/Departures/Departures";
 import CheckIn from "@/components/CheckIn/CheckIn";
 import Destinations from "@/components/Destinations/Destinations";
+import GithubActivity from "@/components/GithubActivity/GithubActivity";
 
 import { technologies } from "@/data/technologies";
 
@@ -35,26 +34,7 @@ export default async function Home() {
       <Departures />
       <CheckIn stats={stats} />
       <Destinations projects={projects} />
-
-      <section>
-        <h2>Mon activité GitHub</h2>
-
-        <Image
-          src="https://ghchart.rshah.org/MihaiElectron"
-          alt="Activité GitHub"
-          width={800}
-          height={200}
-          unoptimized
-        />
-
-        <Image
-          src="https://github-readme-activity-graph.vercel.app/graph?username=MihaiElectron&theme=react-dark"
-          alt="Graph activité GitHub"
-          width={900}
-          height={300}
-          unoptimized
-        />
-      </section>
+      <GithubActivity />
     </main>
   );
 }
