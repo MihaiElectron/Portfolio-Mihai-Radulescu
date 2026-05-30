@@ -1,0 +1,125 @@
+@use "../abstracts" as abs;
+
+.final-call {
+  padding: 80px 0;
+  background-color: abs.$color-primary-background;
+  color: abs.$color-text;
+
+  &__content {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0;
+  }
+
+  &__panel {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 400px;
+    gap: 80px;
+
+    padding: 64px;
+
+    background-color: abs.$color-secondary-background;
+    border: 1px solid abs.$color-borders;
+  }
+
+  &__eyebrow {
+    margin: 0 0 20px;
+
+    font-family: abs.$font-plexmono;
+    font-size: abs.$fs-xs;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+
+    color: abs.$color-title-amber;
+  }
+
+  &__title {
+    margin: 0;
+
+    font-family: abs.$font-plexmono;
+    font-size: 4rem;
+    font-weight: abs.$mono-semibold;
+    line-height: 0.95;
+    text-transform: uppercase;
+
+    color: abs.$color-title-amber;
+
+    text-shadow:
+      0 0 8px rgba(249, 170, 10, 0.5),
+      0 0 16px rgba(249, 170, 10, 0.25);
+  }
+
+  &__description {
+    max-width: 470px;
+    margin: 32px 0 0;
+
+    font-family: abs.$font-plexmono;
+    font-size: abs.$fs-sm;
+    font-weight: abs.$mono-light;
+    line-height: 1.7;
+
+    color: abs.$color-title-amber;
+  }
+
+  &__right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  &__row {
+    display: grid;
+    grid-template-columns: 120px minmax(0, 1fr);
+    align-items: center;
+    gap: 24px;
+
+    padding: 22px 0;
+
+    border-bottom: 1px solid rgba(249, 170, 10, 0.25);
+
+    text-decoration: none;
+
+    span {
+      font-family: abs.$font-plexmono;
+      font-size: 0.7rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+
+      color: abs.$color-title-amber;
+      opacity: 0.7;
+    }
+
+    strong {
+      font-family: abs.$font-plexmono;
+      font-size: abs.$fs-md;
+      font-weight: abs.$mono-semibold;
+
+      color: abs.$color-title-amber;
+      text-align: right;
+    }
+
+    &:hover strong {
+      color: abs.$color-title;
+    }
+  }
+
+  @media screen and (max-width: 900px) {
+    &__panel {
+      grid-template-columns: 1fr;
+      padding: 32px;
+      gap: 48px;
+    }
+
+    &__title {
+      font-size: 3rem;
+    }
+
+    &__row {
+      grid-template-columns: 1fr;
+
+      strong {
+        text-align: left;
+      }
+    }
+  }
+}

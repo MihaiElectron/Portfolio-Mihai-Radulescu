@@ -6,4 +6,10 @@ export interface Profile {
   availability: "AVAILABLE" | "UNAVAILABLE";
   trainingStartDate: string;
   biography: string;
+  email: string;
+  githubUrl: string;
+  githubLabel: string;
+  linkedinUrl: string;
+  linkedinLabel: string;
+  cvUrl: string;
 }

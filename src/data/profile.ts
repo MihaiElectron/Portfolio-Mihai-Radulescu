@@ -9,4 +9,10 @@ export const profile: Profile = {
   trainingStartDate: "2025-09-01",
   biography:
     "Après plusieurs années dans un autre secteur, j'ai choisi une reconversion vers le développement web. Ma première formation dans le domaine est le parcours Intégrateur Web d'OpenClassrooms, réalisé sur 9 mois.",
+  email: "ton-email@example.com",
+  githubUrl: "https://github.com/MihaiElectron",
+  githubLabel: "@MihaiElectron",
+  linkedinUrl: "https://www.linkedin.com/in/ton-profil",
+  linkedinLabel: "/in/ton-profil",
+  cvUrl: "/cv.pdf",
 };
