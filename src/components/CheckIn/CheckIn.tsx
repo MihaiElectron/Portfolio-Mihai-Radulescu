@@ -1,5 +1,12 @@
 import { profile } from "../../data/profile";
 
+interface CheckInProps {
+  stats: {
+    projectsCompleted: number;
+    technologiesCount: number;
+  };
+}
+
 function getTrainingDuration(startDate: Date) {
   const now = new Date();
 
@@ -12,7 +19,7 @@ function getTrainingDuration(startDate: Date) {
   return `${months} mois`;
 }
 
-export default function CheckIn() {
+export default function CheckIn({ stats }: CheckInProps) {
   return (
     <section className="check-in section-separator" id="check-in">
       <div className="check-in__content">
@@ -78,17 +85,19 @@ export default function CheckIn() {
 
           <div className="check-in__stats">
             <div className="check-in__stat">
-              <strong>{getTrainingDuration(new Date("2025-09-01"))}</strong>
+              <strong>
+                {getTrainingDuration(new Date(profile.trainingStartDate))}
+              </strong>
               <span>FORMATION OC</span>
             </div>
 
             <div className="check-in__stat">
-              <strong>{profile.projectsCompleted}</strong>
+              <strong>{stats.projectsCompleted}</strong>
               <span>PROJETS RÉALISÉS</span>
             </div>
 
             <div className="check-in__stat">
-              <strong>{profile.technologiesCount}</strong>
+              <strong>{stats.technologiesCount}</strong>
               <span>TECHNOLOGIES</span>
             </div>
 
