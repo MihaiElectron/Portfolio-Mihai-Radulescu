@@ -3,7 +3,7 @@ import Image from "next/image";
 import Hero from "@/components/Hero/Hero";
 import Departures from "@/components/Departures/Departures";
 import CheckIn from "@/components/CheckIn/CheckIn";
-import Projects from "@/components/Projects/Projects";
+import Destinations from "@/components/Destinations/Destinations";
 
 import { technologies } from "@/data/technologies";
 
@@ -34,7 +34,7 @@ export default async function Home() {
       <Hero />
       <Departures />
       <CheckIn stats={stats} />
-      <Projects projects={projects} />
+      <Destinations projects={projects} />
 
       <section>
         <h2>Mon activité GitHub</h2>
