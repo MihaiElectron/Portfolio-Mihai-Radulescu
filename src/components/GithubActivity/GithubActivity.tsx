@@ -1,6 +1,4 @@
-"use client";
-
-import { GitHubCalendar } from "react-github-calendar";
+import GithubActivityClient from "./GithubActivityClient";
 
 export default function GithubActivity() {
   return (
@@ -19,16 +17,7 @@ export default function GithubActivity() {
         </div>
 
         <div className="github-activity__calendar">
-          <GitHubCalendar
-            username="MihaiElectron"
-            colorScheme="dark"
-            blockSize={12}
-            blockMargin={4}
-            fontSize={12}
-            theme={{
-              dark: ["#1b2028", "#143820", "#2d8f59", "#6fcf97", "#f9aa0a"],
-            }}
-          />
+          <GithubActivityClient />
         </div>
       </div>
     </section>
