@@ -4,6 +4,7 @@ import CheckIn from "@/components/CheckIn/CheckIn";
 import Destinations from "@/components/Destinations/Destinations";
 import GithubActivity from "@/components/GithubActivity/GithubActivity";
 import FinalCall from "@/components/FinalCall/FinalCall";
+import Footer from "@/components/Footer/Footer";
 
 import { technologies } from "@/data/technologies";
 
@@ -37,6 +38,7 @@ export default async function Home() {
       <Destinations projects={projects} />
       <GithubActivity />
       <FinalCall />
+      <Footer />
     </main>
   );
 }
