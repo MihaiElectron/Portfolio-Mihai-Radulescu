@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export default function Navbar() {
   return (
-    <nav className="navbar">
+    <nav className="navbar section-separator">
       <div className="navbar__left">
         <span className="navbar__badge">T12</span>
         <span className="navbar__terminal">TERMINAL 12</span>

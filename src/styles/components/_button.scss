@@ -1,1 +1,31 @@
 // Button SCSS
+@use "../abstracts" as abs;
+
+.button {
+  @include abs.button-base;
+
+  &--primary {
+    background-color: abs.$color-title-amber;
+    color: abs.$color-secondary-background;
+
+    border-color: abs.$color-title-amber;
+
+    &:hover {
+      background-color: transparent;
+      color: abs.$color-title-amber;
+    }
+  }
+
+  &--secondary {
+    background-color: transparent;
+
+    color: abs.$color-text;
+
+    border-color: abs.$color-borders;
+
+    &:hover {
+      border-color: abs.$color-title-amber;
+      color: abs.$color-title-amber;
+    }
+  }
+}
