@@ -15,4 +15,6 @@ export const profile: Profile = {
   linkedinUrl: "https://www.linkedin.com/in/ton-profil",
   linkedinLabel: "/in/ton-profil",
   cvUrl: "/cv.pdf",
+  iataCode: "T12",
+  icaoCode: "LFX12",
 };

@@ -12,4 +12,6 @@ export interface Profile {
   linkedinUrl: string;
   linkedinLabel: string;
   cvUrl: string;
+  iataCode: string;
+  icaoCode: string;
 }

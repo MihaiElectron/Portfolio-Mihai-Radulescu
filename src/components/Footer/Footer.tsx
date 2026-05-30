@@ -11,8 +11,8 @@ export default function Footer() {
         </p>
 
         <div className="footer__infos">
-          <span>IATA · T12</span>
-          <span>ICAO · LFX12</span>
+        <span>IATA · {profile.iataCode}</span>
+        <span>ICAO · {profile.icaoCode}</span>
 
           <a
             href={profile.githubUrl}
