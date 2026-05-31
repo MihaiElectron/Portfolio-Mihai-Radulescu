@@ -2,14 +2,27 @@
 
 import Link from "next/link";
 
+const navLinks = [
+  { href: "depart", section: "01", label: "Departures" },
+  { href: "check-in", section: "02", label: "Check-In" },
+  { href: "destinations", section: "03", label: "Destinations" },
+  { href: "github-activity", section: "04", label: "Radar" },
+  { href: "contact", section: "05", label: "Final Call" },
+];
+
 export default function Navbar() {
-  function scrollToWelcome(event: React.MouseEvent<HTMLAnchorElement>) {
+  function scrollToSection(
+    event: React.MouseEvent<HTMLAnchorElement>,
+    sectionId: string
+  ) {
     event.preventDefault();
 
-    document.getElementById("welcome")?.scrollIntoView({
+    document.getElementById(sectionId)?.scrollIntoView({
       behavior: "smooth",
       block: "start",
     });
+
+    window.history.pushState(null, "", `#${sectionId}`);
   }
 
   return (
@@ -17,7 +30,11 @@ export default function Navbar() {
       <div className="navbar__left">
         <span className="navbar__badge">T12</span>
 
-        <Link href="#welcome" className="navbar__brand" onClick={scrollToWelcome}>
+        <Link
+          href="#welcome"
+          className="navbar__brand"
+          onClick={(event) => scrollToSection(event, "welcome")}
+        >
           <span className="navbar__terminal">TERMINAL 12</span>
           <span className="navbar__dot">·</span>
           <span className="navbar__title">PORTFOLIO</span>
@@ -25,40 +42,18 @@ export default function Navbar() {
       </div>
 
       <ul className="navbar__menu">
-        <li>
-          <Link href="#depart" className="navbar__link">
-            <span className="navbar__section">01</span>
-            <span className="navbar__label">Departures</span>
-          </Link>
-        </li>
-
-        <li>
-          <Link href="#check-in" className="navbar__link">
-            <span className="navbar__section">02</span>
-            <span className="navbar__label">Check-In</span>
-          </Link>
-        </li>
-
-        <li>
-          <Link href="#destinations" className="navbar__link">
-            <span className="navbar__section">03</span>
-            <span className="navbar__label">Destinations</span>
-          </Link>
-        </li>
-
-        <li>
-          <Link href="#github-activity" className="navbar__link">
-            <span className="navbar__section">04</span>
-            <span className="navbar__label">Radar</span>
-          </Link>
-        </li>
-
-        <li>
-          <Link href="#contact" className="navbar__link">
-            <span className="navbar__section">05</span>
-            <span className="navbar__label">Final Call</span>
-          </Link>
-        </li>
+        {navLinks.map((link) => (
+          <li key={link.href}>
+            <Link
+              href={`#${link.href}`}
+              className="navbar__link"
+              onClick={(event) => scrollToSection(event, link.href)}
+            >
+              <span className="navbar__section">{link.section}</span>
+              <span className="navbar__label">{link.label}</span>
+            </Link>
+          </li>
+        ))}
       </ul>
     </nav>
   );
