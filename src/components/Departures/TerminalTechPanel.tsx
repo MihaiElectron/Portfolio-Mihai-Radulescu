@@ -69,7 +69,11 @@ export default function TerminalTechPanel({
       <div className="terminal-tech-panel__header">
         <div>
           <p>ZONE {category.code.toUpperCase()}</p>
-          <h3>{category.name}</h3>
+
+          <h3>
+            {category.name}
+            <span>Departures</span>
+          </h3>
         </div>
 
         <span>
@@ -79,6 +83,7 @@ export default function TerminalTechPanel({
 
       <p className="terminal-tech-panel__description">
         {category.description}
+        <span>Choisissez votre destination.</span>
       </p>
 
       <ul className="terminal-tech-panel__list">
