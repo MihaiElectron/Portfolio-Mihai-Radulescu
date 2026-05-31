@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { technologies } from "@/data/technologies";
+import DepartureAirport from "./TerminalMap";
 
 export default function Departures() {
   const [activeFlights] = useState(technologies.length);
@@ -14,12 +15,11 @@ export default function Departures() {
             <p className="departures__eyebrow">SECTION 01 - DEPARTURES</p>
             <h2 className="departures__title">Tableau des départs</h2>
           </div>
-
           <p className="departures__meta">
             STACK TECHNIQUE <span>·</span> {activeFlights} VOLS ACTIFS
           </p>
         </div>
-
+        <DepartureAirport />
         <div className="departures__table">
           <div className="departures__row departures__row--head">
             <span>VOL</span>
@@ -51,6 +51,7 @@ export default function Departures() {
             </div>
           ))}
         </div>
+        
       </div>
     </section>
   );

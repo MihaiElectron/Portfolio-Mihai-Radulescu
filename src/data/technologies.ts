@@ -7,7 +7,7 @@ export const technologies: Technology[] = [
     destination: "HTML",
     details: ["SEMANTIC", "ACCESSIBILITY", "STRUCTURE"],
     gate: "P2",
-    time: "2024",
+    time: "2025",
     status: "ON TIME",
   },
   {
@@ -16,7 +16,7 @@ export const technologies: Technology[] = [
     destination: "CSS",
     details: ["LAYOUT", "FLEXBOX", "GRID"],
     gate: "P3",
-    time: "2024",
+    time: "2025",
     status: "ON TIME",
   },
   {
@@ -25,7 +25,7 @@ export const technologies: Technology[] = [
     destination: "RESPONSIVE DESIGN",
     details: ["MOBILE FIRST", "MEDIA QUERIES", "UX"],
     gate: "P4",
-    time: "2024",
+    time: "2025",
     status: "ON TIME",
   },
   {
@@ -34,7 +34,7 @@ export const technologies: Technology[] = [
     destination: "SASS / SCSS",
     details: ["BEM", "MIXINS", "ARCHITECTURE"],
     gate: "P4",
-    time: "2024",
+    time: "2025",
     status: "GATE OPEN",
   },
   {
@@ -43,7 +43,7 @@ export const technologies: Technology[] = [
     destination: "JAVASCRIPT",
     details: ["DOM", "EVENTS", "ES6+"],
     gate: "P5",
-    time: "2024",
+    time: "2025",
     status: "BOARDING",
   },
   {
@@ -52,7 +52,7 @@ export const technologies: Technology[] = [
     destination: "API REST",
     details: ["FETCH", "ASYNC", "JSON"],
     gate: "P6",
-    time: "2024",
+    time: "2026",
     status: "BOARDING",
   },
   {
@@ -61,7 +61,7 @@ export const technologies: Technology[] = [
     destination: "GIT & GITHUB",
     details: ["VERSIONING", "BRANCHES", "COMMITS"],
     gate: "P3",
-    time: "2024",
+    time: "2025",
     status: "ON TIME",
   },
   {
@@ -79,7 +79,7 @@ export const technologies: Technology[] = [
     destination: "ACCESSIBILITY",
     details: ["WCAG", "SEMANTICS", "ARIA"],
     gate: "P8",
-    time: "2025",
+    time: "2024",
     status: "ON TIME",
   },
   {
