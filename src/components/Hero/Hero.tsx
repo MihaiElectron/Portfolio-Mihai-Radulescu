@@ -3,6 +3,20 @@
 import HeroWeather from "../HeroWeather/HeroWeather";
 
 export default function Hero() {
+  function scrollToSection(
+    event: React.MouseEvent<HTMLAnchorElement>,
+    sectionId: string
+  ) {
+    event.preventDefault();
+
+    document.getElementById(sectionId)?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+
+    window.history.pushState(null, "", `#${sectionId}`);
+  }
+
   return (
     <section className="hero section-separator" id="welcome">
       <div className="hero__content">
@@ -26,11 +40,19 @@ export default function Hero() {
             </p>
 
             <div className="hero__actions">
-              <a href="#projects" className="button button--primary">
+              <a
+                href="#depart"
+                className="button button--primary"
+                onClick={(event) => scrollToSection(event, "depart")}
+              >
                 Tableau des départs →
               </a>
 
-              <a href="#contact" className="button button--secondary">
+              <a
+                href="#check-in"
+                className="button button--secondary"
+                onClick={(event) => scrollToSection(event, "check-in")}
+              >
                 Carte d&apos;embarquement
               </a>
             </div>
