@@ -10,7 +10,7 @@ interface TerminalTechPanelProps {
   technologies: (Technology | undefined)[];
 }
 
-const ITEMS_PER_PAGE = 6;
+const ITEMS_PER_PAGE = 15;
 
 export default function TerminalTechPanel({
   category,
