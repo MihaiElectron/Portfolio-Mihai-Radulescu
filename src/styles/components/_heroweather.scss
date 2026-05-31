@@ -54,7 +54,7 @@
     height: 8px;
     border-radius: 50%;
     background-color: abs.$color-success;
-    animation: hero-weather-blink 2s ease-in-out infinite;
+    animation: dot-blink 2s ease-in-out infinite;
   }
 
   &__center {
@@ -171,19 +171,5 @@
 
   @media screen and (max-width: 900px) {
     min-height: 420px;
-  }
-}
-
-@keyframes hero-weather-blink {
-  0% {
-    opacity: 1;
-  }
-
-  50% {
-    opacity: 0.25;
-  }
-
-  100% {
-    opacity: 1;
   }
 }

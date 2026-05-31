@@ -83,65 +83,61 @@ export default function HeroWeather() {
 
   return (
     <div className="hero-weather">
-      {!weather && (
-        <p className="hero-weather__loading">Chargement météo...</p>
-      )}
+      <div className="hero-weather__top">
+        <p className="hero-weather__label">HEURE LOCALE UTC+1</p>
 
-      {weather && (
-        <>
-          <div className="hero-weather__top">
-            <p className="hero-weather__label">HEURE LOCALE UTC+1</p>
+        <div className="hero-weather__live">
+          <span className="hero-weather__live-dot"></span>
+          LIVE
+        </div>
+      </div>
 
-            <div className="hero-weather__live">
-              <span className="hero-weather__live-dot"></span>
-              LIVE
-            </div>
-          </div>
+      <div className="hero-weather__center">
+        <p className="hero-weather__time">
+          <span>{time.hours}</span>
 
-          <div className="hero-weather__center">
-            <p className="hero-weather__time">
-              <span>{time.hours}</span>
+          <span className="hero-weather__separator">
+            <span></span>
+            <span></span>
+          </span>
 
-              <span className="hero-weather__separator">
-                <span></span>
-                <span></span>
-              </span>
+          <span>{time.minutes}</span>
 
-              <span>{time.minutes}</span>
+          <span className="hero-weather__seconds">{time.seconds}</span>
+        </p>
 
-              <span className="hero-weather__seconds">{time.seconds}</span>
-            </p>
+        {weather ? (
+          <p className="hero-weather__city">{weather.city}</p>
+        ) : (
+          <p className="hero-weather__loading">Chargement météo...</p>
+        )}
+      </div>
 
-            <p className="hero-weather__city">{weather.city}</p>
-          </div>
+      <div className="hero-weather__bottom">
+        <div className="hero-weather__item">
+          <span className="hero-weather__item-label">MÉTÉO</span>
 
-          <div className="hero-weather__bottom">
-            <div className="hero-weather__item">
-              <span className="hero-weather__item-label">MÉTÉO</span>
+          <span className="hero-weather__item-value">
+            {weather ? getWeatherLabel(weather.weathercode) : "--"}
+          </span>
+        </div>
 
-              <span className="hero-weather__item-value">
-                {getWeatherLabel(weather.weathercode)}
-              </span>
-            </div>
+        <div className="hero-weather__item">
+          <span className="hero-weather__item-label">VENT</span>
 
-            <div className="hero-weather__item">
-              <span className="hero-weather__item-label">VENT</span>
+          <span className="hero-weather__item-value">
+            {weather ? `${Math.round(weather.windspeed)} KM/H` : "--"}
+          </span>
+        </div>
 
-              <span className="hero-weather__item-value">
-                {Math.round(weather.windspeed)} KM/H
-              </span>
-            </div>
+        <div className="hero-weather__item">
+          <span className="hero-weather__item-label">TEMP</span>
 
-            <div className="hero-weather__item">
-              <span className="hero-weather__item-label">TEMP</span>
-
-              <span className="hero-weather__item-value">
-                {Math.round(weather.temperature)}°
-              </span>
-            </div>
-          </div>
-        </>
-      )}
+          <span className="hero-weather__item-value">
+            {weather ? `${Math.round(weather.temperature)}°` : "--"}
+          </span>
+        </div>
+      </div>
     </div>
   );
 }

@@ -69,7 +69,7 @@
     height: 8px;
     border-radius: 50%;
     background-color: abs.$color-success;
-    animation: hero-dot-blink 2s ease-in-out infinite;
+    animation: dot-blink 2s ease-in-out infinite;
   }
 
   &__welcome {
@@ -102,19 +102,5 @@
     font-weight: abs.$font-extralight;
     line-height: 1.6;
     max-width: 650px;
-  }
-}
-
-@keyframes hero-dot-blink {
-  0% {
-    opacity: 1;
-  }
-
-  50% {
-    opacity: 0.25;
-  }
-
-  100% {
-    opacity: 1;
   }
 }

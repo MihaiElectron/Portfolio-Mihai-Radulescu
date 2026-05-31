@@ -31,7 +31,7 @@ export default function Hero() {
               </a>
 
               <a href="#contact" className="button button--secondary">
-                Carte d'embarquement
+                Carte d&apos;embarquement
               </a>
             </div>
           </div>
