@@ -17,7 +17,6 @@
   letter-spacing: abs.$ls-wider;
 
   background-color: abs.$color-primary-background;
-  
 
   &__left {
     display: flex;
@@ -41,10 +40,27 @@
     letter-spacing: 1px;
   }
 
+  &__brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    text-transform: uppercase;
+    color: abs.$color-text;
+    text-decoration: none;
+
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: abs.$color-title-amber;
+      text-decoration: none;
+    }
+  }
+
   &__terminal,
   &__dot,
   &__title {
-    color: abs.$color-text;
+    color: inherit;
   }
 
   &__menu {

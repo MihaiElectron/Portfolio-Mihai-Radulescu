@@ -3,13 +3,25 @@
 import Link from "next/link";
 
 export default function Navbar() {
+  function scrollToWelcome(event: React.MouseEvent<HTMLAnchorElement>) {
+    event.preventDefault();
+
+    document.getElementById("welcome")?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  }
+
   return (
     <nav className="navbar section-separator">
       <div className="navbar__left">
         <span className="navbar__badge">T12</span>
-        <span className="navbar__terminal">TERMINAL 12</span>
-        <span className="navbar__dot">·</span>
-        <span className="navbar__title">PORTFOLIO</span>
+
+        <Link href="#welcome" className="navbar__brand" onClick={scrollToWelcome}>
+          <span className="navbar__terminal">TERMINAL 12</span>
+          <span className="navbar__dot">·</span>
+          <span className="navbar__title">PORTFOLIO</span>
+        </Link>
       </div>
 
       <ul className="navbar__menu">
