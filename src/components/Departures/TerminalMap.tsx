@@ -1,45 +1,79 @@
 import Image from "next/image";
 
-export default function DepartureAirport() {
+import TerminalTechPanel from "./TerminalTechPanel";
+
+import { technologyCategories } from "../../data/technology-categories";
+
+import type { Technology } from "../../types/technology";
+import type { TechnologyCategory } from "../../types/technology-category";
+
+interface TerminalMapProps {
+  activeCategoryId: string | null;
+  onSelectCategory: (categoryId: string) => void;
+  onClosePanel: () => void;
+  category: TechnologyCategory | undefined;
+  technologies: (Technology | undefined)[];
+}
+
+export default function TerminalMap({
+  activeCategoryId,
+  onSelectCategory,
+  onClosePanel,
+  category,
+  technologies,
+}: TerminalMapProps) {
   return (
-    <div className="departure-airport">
-      <Image
-        src="/airport-map.avif"
-        alt="Terminal 12 Hub Technique"
-        fill
-        className="departure-airport__map"
-        priority
-      />
+    <div className="terminal-map">
+      <div className="terminal-map__display">
+        {category ? (
+          <p key={category.id} className="terminal-map__display-text">
+            ZONE {category.code.toUpperCase()} · {category.name}
+          </p>
+        ) : (
+          <p className="terminal-map__display-text terminal-map__display-text--idle">
+            Sélectionnez une zone terminal
+          </p>
+        )}
+      </div>
 
-      <button className="departure-airport__zone departure-airport__zone--a">
-        <strong>A</strong>
-        <span>Frontend</span>
-      </button>
+      <div className="terminal-map__visual" onClick={onClosePanel}>
+        <Image
+          src="/airport-map.avif"
+          alt="Terminal 12 Hub Technique"
+          fill
+          className="terminal-map__image"
+          priority
+        />
 
-      <button className="departure-airport__zone departure-airport__zone--b">
-        <strong>B</strong>
-        <span>Backend</span>
-      </button>
+        {category && (
+          <TerminalTechPanel
+            key={category.id}
+            category={category}
+            technologies={technologies}
+          />
+        )}
 
-      <button className="departure-airport__zone departure-airport__zone--c">
-        <strong>C</strong>
-        <span>State</span>
-      </button>
-
-      <button className="departure-airport__zone departure-airport__zone--d">
-        <strong>D</strong>
-        <span>Qualité</span>
-      </button>
-
-      <button className="departure-airport__zone departure-airport__zone--e">
-        <strong>E</strong>
-        <span>Testing</span>
-      </button>
-
-      <button className="departure-airport__zone departure-airport__zone--f">
-        <strong>F</strong>
-        <span>DevOps</span>
-      </button>
+        {technologyCategories.map((category) => (
+          <button
+            key={category.id}
+            type="button"
+            onClick={(event) => {
+              event.stopPropagation();
+              onSelectCategory(category.id);
+            }}
+            className={`terminal-map__zone terminal-map__zone--${category.code.toLowerCase()} ${
+              activeCategoryId === category.id ? "terminal-map__zone--active" : ""
+            } ${
+              activeCategoryId && activeCategoryId !== category.id
+                ? "terminal-map__zone--away"
+                : ""
+            }`}
+          >
+            <strong>{category.code.toUpperCase()}</strong>
+            <span>{category.name}</span>
+          </button>
+        ))}
+      </div>
     </div>
   );
 }

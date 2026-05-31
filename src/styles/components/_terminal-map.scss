@@ -1,0 +1,253 @@
+@use "../abstracts" as abs;
+
+.terminal-map {
+  display: grid;
+  gap: 24px;
+
+  &__display {
+    min-height: 80px;
+
+    display: flex;
+    align-items: center;
+
+    padding: 20px 24px;
+
+    background-color: abs.$color-secondary-background;
+    border: 1px solid abs.$color-borders;
+
+    overflow: hidden;
+  }
+
+  &__display-text {
+    margin: 0;
+
+    font-family: abs.$font-plexmono;
+    font-size: abs.$fs-xl;
+    font-weight: abs.$mono-semibold;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+
+    color: abs.$color-title-amber;
+
+    animation: terminal-display-in 0.45s ease forwards;
+
+    &--idle {
+      color: abs.$color-text;
+      opacity: 0.55;
+    }
+  }
+
+  &__visual {
+    position: relative;
+
+    width: 100%;
+    aspect-ratio: 16 / 9;
+
+    overflow: hidden;
+
+    background-color: abs.$color-secondary-background;
+    border: 1px solid abs.$color-borders;
+  }
+
+  &__image {
+    object-fit: cover;
+  }
+
+  &__zone {
+    position: absolute;
+    z-index: 4;
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    padding: 10px 14px;
+
+    background-color: rgba(0, 2, 4, 0.26);
+    border: 1px solid abs.$color-title-amber;
+
+    font-family: abs.$font-plexmono;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+
+    color: abs.$color-title-amber;
+
+    cursor: pointer;
+
+    transition:
+      opacity 0.45s ease,
+      transform 0.45s ease,
+      border-color 0.2s ease,
+      background-color 0.2s ease,
+      color 0.2s ease;
+
+    strong {
+      font-size: abs.$fs-sm;
+    }
+
+    span {
+      font-size: 0.7rem;
+    }
+
+    &--active {
+      border-color: abs.$color-success;
+      color: abs.$color-success;
+      background-color: rgba(0, 2, 4, 0.5);
+    }
+
+    &--away {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    &--a {
+      top: 5%;
+      left: 38%;
+      transform: translateX(-50%);
+    }
+
+    &--b {
+      top: 30%;
+      left: 12%;
+    }
+
+    &--c {
+      top: 14%;
+      right: 17%;
+    }
+
+    &--d {
+      bottom: 18%;
+      left: 18%;
+    }
+
+    &--e {
+      bottom: 38%;
+      right: 13%;
+    }
+
+    &--f {
+      bottom: 8%;
+      left: 61%;
+      transform: translateX(-50%);
+    }
+  }
+}
+
+.terminal-tech-panel {
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  right: 24px;
+  z-index: 6;
+
+  padding: 20px 24px;
+
+  background-color: rgba(0, 2, 4, 0.72);
+  backdrop-filter: blur(6px);
+  border: 1px solid abs.$color-borders;
+
+  color: abs.$color-text;
+
+  animation: terminal-panel-in 0.35s ease forwards;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 24px;
+
+    p {
+      margin: 0 0 6px;
+
+      font-family: abs.$font-plexmono;
+      font-size: 0.7rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+
+      color: abs.$color-title-amber;
+      opacity: 0.75;
+    }
+
+    h3 {
+      margin: 0;
+
+      font-family: abs.$font-plexmono;
+      font-size: abs.$fs-xl;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+
+      color: abs.$color-title-amber;
+    }
+
+    > span {
+      font-family: abs.$font-plexmono;
+      font-size: 0.7rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+
+      color: abs.$color-text;
+      opacity: 0.65;
+    }
+  }
+
+  &__description {
+    margin: 16px 0 0;
+
+    font-family: abs.$font-plexmono;
+    font-size: abs.$fs-sm;
+    font-weight: abs.$mono-light;
+    line-height: 1.6;
+
+    color: abs.$color-text;
+  }
+
+  &__list {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+
+    margin: 20px 0 0;
+    padding: 0;
+
+    list-style: none;
+
+    li {
+      padding: 12px 14px;
+
+      background-color: rgba(0, 2, 4, 0.75);
+      border: 1px solid abs.$color-borders;
+
+      font-family: abs.$font-plexmono;
+      font-size: abs.$fs-xs;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+
+      color: abs.$color-title-amber;
+    }
+  }
+}
+
+@keyframes terminal-display-in {
+  0% {
+    opacity: 0;
+    transform: translate(-80px, -20px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+}
+
+@keyframes terminal-panel-in {
+  0% {
+    opacity: 0;
+    transform: translateY(-16px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
