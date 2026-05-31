@@ -4,7 +4,7 @@ import HeroWeather from "../HeroWeather/HeroWeather";
 
 export default function Hero() {
   return (
-    <section className="hero section-separator" id="depart">
+    <section className="hero section-separator" id="welcome">
       <div className="hero__content">
         <div className="hero__layout">
           <div className="hero__left">

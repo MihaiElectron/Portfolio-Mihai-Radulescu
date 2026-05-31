@@ -23,7 +23,7 @@ export default function TerminalMap({
   technologies,
 }: TerminalMapProps) {
   return (
-    <div className="terminal-map">
+    <div className="terminal-map" >
       <div className="terminal-map__display">
         {category ? (
           <p key={category.id} className="terminal-map__display-text">

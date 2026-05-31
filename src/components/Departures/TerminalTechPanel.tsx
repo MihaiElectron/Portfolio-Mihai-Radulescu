@@ -42,6 +42,25 @@ export default function TerminalTechPanel({
     return () => clearInterval(interval);
   }, [pages.length]);
 
+  function handleTechnologyClick(technologyId: string) {
+    const url = new URL(window.location.href);
+
+    url.searchParams.set("tech", technologyId);
+    url.hash = "destinations";
+
+    window.history.pushState({}, "", url);
+
+    window.dispatchEvent(
+      new CustomEvent("terminal-tech-filter", {
+        detail: technologyId,
+      })
+    );
+
+    document.getElementById("destinations")?.scrollIntoView({
+      behavior: "smooth",
+    });
+  }
+
   return (
     <div
       className="terminal-tech-panel"
@@ -64,7 +83,14 @@ export default function TerminalTechPanel({
 
       <ul className="terminal-tech-panel__list">
         {(pages[page] ?? []).map((technology) => (
-          <li key={technology.id}>{technology.name}</li>
+          <li key={technology.id}>
+            <button
+              type="button"
+              onClick={() => handleTechnologyClick(technology.id)}
+            >
+              {technology.name}
+            </button>
+          </li>
         ))}
       </ul>
     </div>
