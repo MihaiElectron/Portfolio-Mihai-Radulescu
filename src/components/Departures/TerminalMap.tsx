@@ -36,7 +36,12 @@ export default function TerminalMap({
         )}
       </div>
 
-      <div className="terminal-map__visual" onClick={onClosePanel}>
+      <div
+        className={`terminal-map__visual ${
+          activeCategoryId ? "terminal-map__visual--selected" : ""
+        }`}
+        onClick={onClosePanel}
+      >
         <Image
           src="/airport-map.avif"
           alt="Terminal 12 Hub Technique"
@@ -53,26 +58,30 @@ export default function TerminalMap({
           />
         )}
 
-        {technologyCategories.map((category) => (
-          <button
-            key={category.id}
-            type="button"
-            onClick={(event) => {
-              event.stopPropagation();
-              onSelectCategory(category.id);
-            }}
-            className={`terminal-map__zone terminal-map__zone--${category.code.toLowerCase()} ${
-              activeCategoryId === category.id ? "terminal-map__zone--active" : ""
-            } ${
-              activeCategoryId && activeCategoryId !== category.id
-                ? "terminal-map__zone--away"
-                : ""
-            }`}
-          >
-            <strong>{category.code.toUpperCase()}</strong>
-            <span>{category.name}</span>
-          </button>
-        ))}
+        <div
+          className={`terminal-map__zones ${
+            activeCategoryId ? "terminal-map__zones--selected" : ""
+          }`}
+        >
+          {technologyCategories.map((category) => (
+            <button
+              key={category.id}
+              type="button"
+              onClick={(event) => {
+                event.stopPropagation();
+                onSelectCategory(category.id);
+              }}
+              className={`terminal-map__zone terminal-map__zone--${category.code.toLowerCase()} ${
+                activeCategoryId === category.id
+                  ? "terminal-map__zone--active"
+                  : ""
+              }`}
+            >
+              <strong>{category.code.toUpperCase()}</strong>
+              <span>{category.name}</span>
+            </button>
+          ))}
+        </div>
       </div>
     </div>
   );

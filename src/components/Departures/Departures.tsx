@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import TerminalMap from "./TerminalMap";
 
@@ -22,6 +22,24 @@ export default function Departures() {
         technologies.find((technology) => technology.id === technologyId)
       )
       .filter(Boolean) ?? [];
+
+  useEffect(() => {
+    if (!selectedCategoryId) return;
+
+    const closeOnOutsideClick = (event: MouseEvent) => {
+      const target = event.target as HTMLElement;
+
+      if (!target.closest(".terminal-map")) {
+        setSelectedCategoryId(null);
+      }
+    };
+
+    document.addEventListener("click", closeOnOutsideClick);
+
+    return () => {
+      document.removeEventListener("click", closeOnOutsideClick);
+    };
+  }, [selectedCategoryId]);
 
   return (
     <section className="departures section-separator" id="depart">

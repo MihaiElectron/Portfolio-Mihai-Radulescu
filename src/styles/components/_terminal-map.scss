@@ -5,12 +5,13 @@
   gap: 24px;
 
   &__display {
-    min-height: 80px;
+    min-height: 48px;
 
     display: flex;
     align-items: center;
+    justify-content: flex-end;
 
-    padding: 20px 24px;
+    padding: 6px 24px;
 
     background-color: abs.$color-secondary-background;
     border: 1px solid abs.$color-borders;
@@ -19,21 +20,25 @@
   }
 
   &__display-text {
+    width: 100%;
     margin: 0;
 
     font-family: abs.$font-plexmono;
-    font-size: abs.$fs-xl;
+    font-size: abs.$fs-lg;
     font-weight: abs.$mono-semibold;
     letter-spacing: 4px;
     text-transform: uppercase;
+    text-align: right;
 
     color: abs.$color-title-amber;
 
-    animation: terminal-display-in 0.45s ease forwards;
+    animation: terminal-display-landing ease-out 0.6s forwards;
+  
 
     &--idle {
       color: abs.$color-text;
       opacity: 0.55;
+      animation: none;
     }
   }
 
@@ -53,13 +58,26 @@
     object-fit: cover;
   }
 
+  &__zones {
+    position: absolute;
+    inset: 0;
+    z-index: 4;
+
+    pointer-events: none;
+  }
+
   &__zone {
     position: absolute;
-    z-index: 4;
+
+    left: var(--x);
+    top: var(--y);
 
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 10px;
+
+    min-width: 128px;
 
     padding: 10px 14px;
 
@@ -73,13 +91,17 @@
     color: abs.$color-title-amber;
 
     cursor: pointer;
+    pointer-events: auto;
+
+    transform: translate(-50%, -50%);
 
     transition:
-      opacity 0.45s ease,
-      transform 0.45s ease,
-      border-color 0.2s ease,
-      background-color 0.2s ease,
-      color 0.2s ease;
+      left 1.4s cubic-bezier(0.16, 1, 0.3, 1),
+      top 1.4s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 1.4s cubic-bezier(0.16, 1, 0.3, 1),
+      border-color 0.25s ease,
+      background-color 0.25s ease,
+      color 0.25s ease;
 
     strong {
       font-size: abs.$fs-sm;
@@ -95,41 +117,64 @@
       background-color: rgba(0, 2, 4, 0.5);
     }
 
-    &--away {
-      opacity: 0;
-      pointer-events: none;
-    }
-
     &--a {
-      top: 5%;
-      left: 38%;
-      transform: translateX(-50%);
+      --x: 38%;
+      --y: 8%;
     }
 
     &--b {
-      top: 30%;
-      left: 12%;
+      --x: 18%;
+      --y: 35%;
     }
 
     &--c {
-      top: 14%;
-      right: 17%;
+      --x: 78%;
+      --y: 18%;
     }
 
     &--d {
-      bottom: 18%;
-      left: 18%;
+      --x: 24%;
+      --y: 82%;
     }
 
     &--e {
-      bottom: 38%;
-      right: 13%;
+      --x: 78%;
+      --y: 58%;
     }
 
     &--f {
-      bottom: 8%;
-      left: 61%;
-      transform: translateX(-50%);
+      --x: 61%;
+      --y: 92%;
+    }
+  }
+
+  &__visual--selected {
+    .terminal-map__zone {
+      top: 92%;
+    }
+
+    .terminal-map__zone--a {
+      left: 10%;
+    }
+
+    .terminal-map__zone--b {
+      left: 27.5%;
+    }
+
+    .terminal-map__zone--c {
+      left: 44.5%;
+    }
+
+    .terminal-map__zone--d {
+      left: 60%;
+    }
+
+    .terminal-map__zone--e {
+      left: 75%;
+    }
+
+    .terminal-map__zone--f {
+      left: 90%;
     }
   }
 }
@@ -149,7 +194,8 @@
 
   color: abs.$color-text;
 
-  animation: terminal-panel-in 0.35s ease forwards;
+  opacity: 0;
+  animation: terminal-panel-in 0.6s ease-out forwards;
 
   &__header {
     display: flex;
@@ -204,7 +250,7 @@
 
   &__list {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(5, minmax(0, 1fr));
     gap: 12px;
 
     margin: 20px 0 0;
@@ -228,22 +274,24 @@
   }
 }
 
-@keyframes terminal-display-in {
+@keyframes terminal-display-landing {
+  /* Départ rapide */
   0% {
     opacity: 0;
-    transform: translate(-80px, -20px);
+    transform: translate(0, 40px);
   }
 
   100% {
     opacity: 1;
     transform: translate(0, 0);
-  }
+  }   
 }
+
 
 @keyframes terminal-panel-in {
   0% {
     opacity: 0;
-    transform: translateY(-16px);
+    transform: translateY(-180px);
   }
 
   100% {
