@@ -1,21 +1,132 @@
 @use "../abstracts" as abs;
 
 .destination-card {
+  position: relative;
+
   min-height: 280px;
 
   display: flex;
   flex-direction: column;
+
+  overflow: hidden;
 
   padding: 24px;
 
   background-color: abs.$color-secondary-background;
   border: 1px solid abs.$color-borders;
 
-  &__header,
-  &__infos {
+  transition: border-color 0.2s ease,
+  opacity 0.2s ease;
+
+  &::before,
+  &::after {
+    content: "";
+  
+    position: absolute;
+    inset: -20%;
+  
+    z-index: 21;
+  
+    opacity: 0;
+  
+    pointer-events: none;
+  
+    background: radial-gradient(
+      circle at center,
+      transparent 0%,
+      transparent 35%,
+      rgba(249, 170, 10, 0.15) 55%,
+      rgba(249, 170, 10, 0.55) 75%,
+      rgba(0, 2, 4, 1) 100%
+    );
+  
+    transform: scale(3);
+  }
+
+  &::after {
+    z-index: 21;
+
+    background: radial-gradient(
+      circle at center,
+      rgba(249, 170, 10, 0.9) 0%,
+      rgba(249, 170, 10, 0.35) 18%,
+      rgba(0, 2, 4, 0.92) 42%,
+      rgba(0, 2, 4, 0.98) 100%
+    );
+
+    transform: scale(1);
+  }
+
+  &--expanded {
+    grid-column: 1 / -1;
+    min-height: auto;
+
+    border-color: abs.$color-title-amber;
+
+    &::before {
+      animation: destination-crt-scan 0.22s ease-out;
+    }
+
+    .destination-card__preview {
+      animation: destination-preview-in 0.18s ease-out 0.16s forwards;
+    }
+  }
+
+  &--closing {
+    animation: destination-card-border-out 0.22s ease forwards;
+
+    &::after {
+      animation: destination-crt-close 0.28s ease-in forwards;
+    }
+  
+    .destination-card__preview,
+    .destination-card__header,
+    .destination-card__name,
+    .destination-card__description,
+    .destination-card__topics,
+    .destination-card__actions,
+    .destination-card__close {
+      animation: destination-content-fade-out 0.22s ease-out forwards;
+    }
+  }
+
+  &__close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    z-index: 10;
+
+    width: 32px;
+    height: 32px;
+
+    background-color: rgba(0, 2, 4, 0.75);
+    border: 1px solid rgba(249, 170, 10, 0.55);
+
+    font-family: abs.$font-plexmono;
+    font-size: 1.2rem;
+    line-height: 1;
+
+    color: abs.$color-title-amber;
+
+    cursor: pointer;
+
+    transition:
+      border-color 0.2s ease,
+      color 0.2s ease,
+      transform 0.2s ease;
+
+    &:hover {
+      border-color: abs.$color-title-amber;
+      transform: rotate(90deg);
+    }
+  }
+
+  &__header {
     display: flex;
     justify-content: space-between;
     gap: 16px;
+
+    padding-right: 40px;
 
     font-family: abs.$font-plexmono;
     font-size: 0.7rem;
@@ -49,7 +160,6 @@
     font-family: abs.$font-plexmono;
     font-size: abs.$fs-xl;
     font-weight: abs.$mono-semibold;
-
     text-transform: uppercase;
 
     color: abs.$color-title-amber;
@@ -64,16 +174,6 @@
     line-height: 1.6;
 
     color: abs.$color-text;
-  }
-
-  &__infos {
-    margin-top: 24px;
-    padding-top: 16px;
-
-    border-top: 1px dashed abs.$color-grid;
-
-    color: abs.$color-text;
-    opacity: 0.7;
   }
 
   &__topics {
@@ -100,9 +200,90 @@
     }
   }
 
-  &__link {
+  &__preview {
+    display: grid;
+    gap: 24px;
+
+    margin-top: 32px;
+    padding-top: 24px;
+
+    border-top: 1px dashed abs.$color-grid;
+
+    opacity: 0;
+  }
+
+  &__video {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+
+    display: block;
+
+    object-fit: cover;
+
+    background-color: abs.$color-primary-background;
+    border: 1px solid abs.$color-borders;
+  }
+
+  &__details {
+    max-height: 380px;
+    overflow-y: auto;
+
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+
+    padding-right: 8px;
+
+    scrollbar-width: thin;
+    scrollbar-color: abs.$color-title-amber abs.$color-secondary-background;
+
+    div {
+      padding: 16px;
+
+      background-color: rgba(0, 2, 4, 0.35);
+      border: 1px solid abs.$color-borders;
+    }
+
+    span {
+      display: block;
+
+      margin-bottom: 8px;
+
+      font-family: abs.$font-plexmono;
+      font-size: 0.7rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+
+      color: abs.$color-title-amber;
+    }
+
+    p {
+      margin: 0;
+
+      font-family: abs.$font-plexmono;
+      font-size: abs.$fs-sm;
+      font-weight: abs.$mono-light;
+      line-height: 1.6;
+
+      color: abs.$color-text;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+
     margin-top: auto;
     padding-top: 24px;
+  }
+
+  &__link,
+  &__button {
+    padding: 10px 12px;
+
+    background-color: rgba(0, 2, 4, 0.55);
+    border: 1px solid rgba(249, 170, 10, 0.55);
 
     font-family: abs.$font-plexmono;
     font-size: abs.$fs-xs;
@@ -112,10 +293,106 @@
 
     color: abs.$color-title-amber;
 
-    transition: opacity 0.2s ease;
+    cursor: pointer;
+
+    transition:
+      border-color 0.2s ease,
+      color 0.2s ease,
+      transform 0.2s ease;
 
     &:hover {
-      opacity: 0.8;
+      border-color: abs.$color-title-amber;
+      transform: translateY(-2px);
     }
+  }
+
+  &__button {
+    margin-left: auto;
+  }
+
+  @media screen and (max-width: 900px) {
+    &__details {
+      max-height: 420px;
+      grid-template-columns: 1fr;
+    }
+
+    &__actions {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    &__link,
+    &__button {
+      text-align: center;
+    }
+
+    &__button {
+      margin-left: 0;
+    }
+  }
+}
+
+@keyframes destination-crt-scan {
+  0% {
+    opacity: 0;
+    transform: translateY(-120%);
+  }
+
+  35% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(120%);
+  }
+}
+
+@keyframes destination-preview-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes destination-content-fade-out {
+  0% {
+    opacity: 1;
+    filter: blur(0);
+  }
+
+  100% {
+    opacity: 0;
+    filter: blur(2px);
+  }
+}
+
+@keyframes destination-crt-close {
+  0% {
+    opacity: 0.1;
+    transform: scale(3);
+  }
+
+  70% {
+    opacity: 1;
+    transform: scale(0.35);
+  }
+
+  100% {
+    opacity: 0.2;
+    transform: scale(0);
+  }
+}
+
+@keyframes destination-card-border-out {
+  from {
+    border-color: abs.$color-title-amber;
+  }
+
+  to {
+    border-color: transparent;
   }
 }

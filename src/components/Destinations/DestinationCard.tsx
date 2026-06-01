@@ -1,7 +1,15 @@
+"use client";
+
 import type { Project } from "../../types/project";
+
+import { projectDetails } from "../../data/project-details";
 
 interface DestinationCardProps {
   project: Project;
+  isExpanded?: boolean;
+  isClosing?: boolean;
+  onExpand: () => void;
+  onClose: () => void;
 }
 
 function getProjectTechnologies(topics: string[]) {
@@ -10,11 +18,42 @@ function getProjectTechnologies(topics: string[]) {
   );
 }
 
-export default function DestinationCard({ project }: DestinationCardProps) {
+function formatTopic(topic: string) {
+  return topic.replaceAll("-", " ");
+}
+
+function slugify(value: string) {
+  return value.toLowerCase().trim().replaceAll(" ", "-").replaceAll("_", "-");
+}
+
+export default function DestinationCard({
+  project,
+  isExpanded = false,
+  isClosing = false,
+  onExpand,
+  onClose,
+}: DestinationCardProps) {
   const technologies = getProjectTechnologies(project.topics);
+  const details = projectDetails[slugify(project.name)];
 
   return (
-    <article className="destination-card">
+    <article
+      className={`destination-card ${
+        isExpanded ? "destination-card--expanded" : ""
+      } ${isClosing ? "destination-card--closing" : ""}`}
+      onClick={(event) => event.stopPropagation()}
+    >
+      {isExpanded && (
+        <button
+          type="button"
+          className="destination-card__close"
+          onClick={onClose}
+          aria-label="Fermer le dossier projet"
+        >
+          ×
+        </button>
+      )}
+
       <div className="destination-card__header">
         <span className="destination-card__flight">GH</span>
 
@@ -31,27 +70,100 @@ export default function DestinationCard({ project }: DestinationCardProps) {
         {project.description ?? "Aucune description disponible."}
       </p>
 
-      <div className="destination-card__infos">
-        <span>{project.language ?? "N/A"}</span>
-        <span>{project.stars} STARS</span>
-      </div>
-
       {technologies.length > 0 && (
         <ul className="destination-card__topics">
           {technologies.map((topic) => (
-            <li key={topic}>{topic}</li>
+            <li key={topic}>{formatTopic(topic)}</li>
           ))}
         </ul>
       )}
 
-      <a
-        href={project.url}
-        target="_blank"
-        rel="noreferrer"
-        className="destination-card__link"
-      >
-        Voir le repo
-      </a>
+      {isExpanded && details && (
+        <div className="destination-card__preview">
+          {details.video && (
+            <video
+              className="destination-card__video"
+              autoPlay
+              loop
+              muted
+              playsInline
+              preload="metadata"
+            >
+              {details.video.webm && (
+                <source src={details.video.webm} type="video/webm" />
+              )}
+
+              {details.video.mp4 && (
+                <source src={details.video.mp4} type="video/mp4" />
+              )}
+            </video>
+          )}
+
+          <div className="destination-card__details">
+            <div>
+              <span>Contexte</span>
+              <p>{details.context}</p>
+            </div>
+
+            <div>
+              <span>Objectifs</span>
+              <p>{details.objectives}</p>
+            </div>
+
+            <div>
+              <span>Stack technique</span>
+              <p>{technologies.map(formatTopic).join(" · ")}</p>
+            </div>
+
+            <div>
+              <span>Compétences développées</span>
+              <p>{details.skills}</p>
+            </div>
+
+            <div>
+              <span>Résultats et impact</span>
+              <p>{details.results}</p>
+            </div>
+
+            <div>
+              <span>Perspectives d’amélioration</span>
+              <p>{details.improvements}</p>
+            </div>
+          </div>
+        </div>
+      )}
+
+      <div className="destination-card__actions">
+        <a
+          href={project.url}
+          target="_blank"
+          rel="noreferrer"
+          className="destination-card__link"
+        >
+          Voir le repo
+        </a>
+
+        {!isExpanded && (
+          <button
+            type="button"
+            className="destination-card__button"
+            onClick={onExpand}
+          >
+            Dossier de vol
+          </button>
+        )}
+
+        {isExpanded && details?.liveUrl && (
+          <a
+            href={details.liveUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="destination-card__link"
+          >
+            Site en ligne
+          </a>
+        )}
+      </div>
     </article>
   );
 }

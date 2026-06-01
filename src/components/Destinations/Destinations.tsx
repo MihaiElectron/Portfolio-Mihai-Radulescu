@@ -22,14 +22,27 @@ export default function Destinations({
   projects,
   githubStatus,
 }: DestinationsProps) {
-  const [activeTechnology, setActiveTechnology] = useState<string | null>();
-  getInitialTechnologyFilter()
+  const [activeTechnology, setActiveTechnology] = useState<string | null>(() =>
+    getInitialTechnologyFilter()
+  );
+
+  const [selectedProjectName, setSelectedProjectName] = useState<string | null>(
+    null
+  );
+
+  const [closingProjectName, setClosingProjectName] = useState<string | null>(
+    null
+  );
+
+  const [scrollPosition, setScrollPosition] = useState(0);
 
   useEffect(() => {
-
     const handleTechFilter = (event: Event) => {
       const customEvent = event as CustomEvent<string>;
+
       setActiveTechnology(customEvent.detail);
+      setSelectedProjectName(null);
+      setClosingProjectName(null);
     };
 
     window.addEventListener("terminal-tech-filter", handleTechFilter);
@@ -47,6 +60,41 @@ export default function Destinations({
     );
   }, [projects, activeTechnology]);
 
+  const visibleProjects = selectedProjectName
+    ? filteredProjects.filter((project) => project.name === selectedProjectName)
+    : filteredProjects;
+
+  function handleExpand(projectName: string) {
+    setScrollPosition(window.scrollY);
+    setSelectedProjectName(projectName);
+    setClosingProjectName(null);
+
+    requestAnimationFrame(() => {
+      document.getElementById("destinations")?.scrollIntoView({
+        behavior: "auto",
+        block: "start",
+      });
+    });
+  }
+
+  function handleCloseProject() {
+    if (!selectedProjectName) return;
+
+    setClosingProjectName(selectedProjectName);
+
+    window.setTimeout(() => {
+      setSelectedProjectName(null);
+      setClosingProjectName(null);
+
+      requestAnimationFrame(() => {
+        window.scrollTo({
+          top: scrollPosition,
+          behavior: "auto",
+        });
+      });
+    }, 220);
+  }
+
   function clearFilter() {
     const url = new URL(window.location.href);
 
@@ -56,6 +104,8 @@ export default function Destinations({
     window.history.pushState({}, "", url);
 
     setActiveTechnology(null);
+    setSelectedProjectName(null);
+    setClosingProjectName(null);
 
     document.getElementById("depart")?.scrollIntoView({
       behavior: "smooth",
@@ -66,6 +116,9 @@ export default function Destinations({
     <section
       className="destinations section-separator"
       id="destinations"
+      onClick={() => {
+        if (selectedProjectName) handleCloseProject();
+      }}
     >
       <div className="destinations__content">
         <div className="destinations__header">
@@ -74,15 +127,14 @@ export default function Destinations({
               SECTION 03 - DESTINATIONS
             </p>
 
-            <h2 className="destinations__title">
-              Projets GitHub
-            </h2>
+            <h2 className="destinations__title">Projets GitHub</h2>
           </div>
 
           <p className="destinations__meta">
-            PORTFOLIO · {filteredProjects.length} DESTINATIONS
+            PORTFOLIO · {visibleProjects.length} DESTINATIONS
           </p>
         </div>
+
         {activeTechnology && (
           <div className="destinations__filter">
             <span>FILTRE ACTIF · {activeTechnology}</span>
@@ -104,10 +156,14 @@ export default function Destinations({
         )}
 
         <div className="destinations__grid">
-          {filteredProjects.map((project) => (
+          {visibleProjects.map((project) => (
             <DestinationCard
               key={project.name}
               project={project}
+              isExpanded={selectedProjectName === project.name}
+              isClosing={closingProjectName === project.name}
+              onExpand={() => handleExpand(project.name)}
+              onClose={handleCloseProject}
             />
           ))}
         </div>
