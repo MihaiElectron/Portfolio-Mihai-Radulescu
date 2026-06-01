@@ -92,7 +92,7 @@ export default function Destinations({
           behavior: "auto",
         });
       });
-    }, 220);
+    }, 460);
   }
 
   function clearFilter() {

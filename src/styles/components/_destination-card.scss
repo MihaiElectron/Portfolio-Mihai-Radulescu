@@ -1,14 +1,45 @@
 @use "../abstracts" as abs;
 
+// ─── Flash CRT — élément indépendant en position fixed ───────────────────────
+// Rendu HORS de la carte pour échapper au clip-path
+.destination-card__crt-flash {
+  position: fixed;
+  z-index: 9999;
+
+  // Centré sur lui-même via transform
+  transform: translate(-50%, -50%);
+
+  width: 0;
+  height: 0;
+
+  border-radius: 50%;
+  pointer-events: none;
+
+  background: radial-gradient(
+    ellipse,
+    #ffffff 0%,
+    #fffbf0 10%,
+    rgba(249, 170, 10, 1) 30%,
+    rgba(249, 170, 10, 0.5) 60%,
+    transparent 100%
+  );
+
+  opacity: 0;
+
+  &--active {
+    animation: destination-crt-flash 0.46s ease-out forwards;
+  }
+}
+
+// ─── Carte ────────────────────────────────────────────────────────────────────
 .destination-card {
   position: relative;
+  overflow: hidden;
 
   min-height: 280px;
 
   display: flex;
   flex-direction: column;
-
-  overflow: hidden;
 
   padding: 24px;
 
@@ -16,47 +47,38 @@
   border: 1px solid abs.$color-borders;
 
   transition: border-color 0.2s ease,
-  opacity 0.2s ease;
+              opacity 0.2s ease;
 
-  &::before,
-  &::after {
+  // Scan CRT à l'ouverture
+  &::before {
     content: "";
-  
+
     position: absolute;
-    inset: -20%;
-  
-    z-index: 21;
-  
+    inset: 0;
+    z-index: 50;
+
     opacity: 0;
-  
     pointer-events: none;
-  
-    background: radial-gradient(
-      circle at center,
+
+    background: linear-gradient(
+      180deg,
       transparent 0%,
-      transparent 35%,
-      rgba(249, 170, 10, 0.15) 55%,
-      rgba(249, 170, 10, 0.55) 75%,
-      rgba(0, 2, 4, 1) 100%
+      transparent 44%,
+      rgba(249, 170, 10, 0.08) 48%,
+      rgba(249, 170, 10, 0.9) 50%,
+      rgba(249, 170, 10, 0.08) 52%,
+      transparent 56%,
+      transparent 100%
     );
-  
-    transform: scale(3);
+
+    transform: translateY(-120%);
   }
 
   &::after {
-    z-index: 21;
-
-    background: radial-gradient(
-      circle at center,
-      rgba(249, 170, 10, 0.9) 0%,
-      rgba(249, 170, 10, 0.35) 18%,
-      rgba(0, 2, 4, 0.92) 42%,
-      rgba(0, 2, 4, 0.98) 100%
-    );
-
-    transform: scale(1);
+    display: none;
   }
 
+  // ── OUVERTURE ────────────────────────────────────────────────────────────
   &--expanded {
     grid-column: 1 / -1;
     min-height: auto;
@@ -64,7 +86,7 @@
     border-color: abs.$color-title-amber;
 
     &::before {
-      animation: destination-crt-scan 0.22s ease-out;
+      animation: destination-crt-scan 0.22s ease-out forwards;
     }
 
     .destination-card__preview {
@@ -72,13 +94,12 @@
     }
   }
 
+  // ── FERMETURE CRT ────────────────────────────────────────────────────────
   &--closing {
-    animation: destination-card-border-out 0.22s ease forwards;
+    animation:
+      destination-card-border-out 0.46s ease forwards,
+      destination-crt-collapse    0.46s ease-in forwards;
 
-    &::after {
-      animation: destination-crt-close 0.28s ease-in forwards;
-    }
-  
     .destination-card__preview,
     .destination-card__header,
     .destination-card__name,
@@ -86,9 +107,11 @@
     .destination-card__topics,
     .destination-card__actions,
     .destination-card__close {
-      animation: destination-content-fade-out 0.22s ease-out forwards;
+      animation: destination-crt-glow 0.46s ease-in forwards;
     }
   }
+
+  // ── Enfants ───────────────────────────────────────────────────────────────
 
   &__close {
     position: absolute;
@@ -332,16 +355,16 @@
   }
 }
 
+// ─── Animations ouverture ─────────────────────────────────────────────────────
+
 @keyframes destination-crt-scan {
   0% {
     opacity: 0;
     transform: translateY(-120%);
   }
-
   35% {
     opacity: 1;
   }
-
   100% {
     opacity: 0;
     transform: translateY(120%);
@@ -349,50 +372,77 @@
 }
 
 @keyframes destination-preview-in {
-  from {
-    opacity: 0;
-  }
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
 
-  to {
-    opacity: 1;
+// ─── Animations fermeture CRT ─────────────────────────────────────────────────
+
+// Collapse vertical global sur la carte — s'arrête à 55%
+// puis tient l'état invisible pendant que le flash vit
+@keyframes destination-crt-collapse {
+  0% {
+    clip-path: inset(0% 0% 0% 0%);
+    filter: brightness(1);
+  }
+  15% {
+    clip-path: inset(0% 0% 0% 0%);
+    filter: brightness(1.8) saturate(2);
+  }
+  45% {
+    clip-path: inset(42% 0% 42% 0%);
+    filter: brightness(3) saturate(3);
+  }
+  55%, 100% {
+    clip-path: inset(49.9% 0% 49.9% 0%);
+    filter: brightness(0);
   }
 }
 
-@keyframes destination-content-fade-out {
+// Glow contenu — synchronisé avec le collapse
+@keyframes destination-crt-glow {
   0% {
     opacity: 1;
-    filter: blur(0);
+    filter: brightness(1);
+    text-shadow: none;
   }
-
-  100% {
-    opacity: 0;
-    filter: blur(2px);
-  }
-}
-
-@keyframes destination-crt-close {
-  0% {
-    opacity: 0.1;
-    transform: scale(3);
-  }
-
-  70% {
+  15% {
     opacity: 1;
-    transform: scale(0.35);
+    filter: brightness(1.6) saturate(2);
+    text-shadow: 0 0 8px rgba(249, 170, 10, 0.6);
   }
-
-  100% {
-    opacity: 0.2;
-    transform: scale(0);
+  45% {
+    opacity: 1;
+    filter: brightness(2.5) saturate(3);
+    text-shadow: 0 0 16px rgba(249, 170, 10, 1),
+                 0 0 32px rgba(249, 170, 10, 0.6);
+  }
+  55%, 100% {
+    opacity: 1;
+    filter: brightness(5);
+    text-shadow: 0 0 24px rgba(255, 255, 255, 0.9),
+                 0 0 48px rgba(249, 170, 10, 0.8);
   }
 }
 
+// Flash CRT — démarre à 50%, grandit puis s'éteint
+// Positionné en fixed via JS dans DestinationCard.tsx
+@keyframes destination-crt-flash {
+  0%   { opacity: 0;   width: 0;     height: 0;    }
+  50%  { opacity: 0;   width: 0;     height: 0;    }
+  // Ligne elliptique large (phosphore qui s'étire)
+  60%  { opacity: 1;   width: 220px; height: 14px; }
+  // Rétrécissement vers un point
+  72%  { opacity: 1;   width: 90px;  height: 8px;  }
+  82%  { opacity: 1;   width: 30px;  height: 5px;  }
+  // Intensification max avant disparition
+  88%  { opacity: 1;   width: 16px;  height: 16px; }
+  94%  { opacity: 0.9; width: 8px;   height: 8px;  }
+  100% { opacity: 0;   width: 2px;   height: 2px;  }
+}
+
+// Bordure qui s'éteint
 @keyframes destination-card-border-out {
-  from {
-    border-color: abs.$color-title-amber;
-  }
-
-  to {
-    border-color: transparent;
-  }
+  from { border-color: abs.$color-title-amber; }
+  to   { border-color: transparent; }
 }
