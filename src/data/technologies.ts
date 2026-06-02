@@ -2,12 +2,12 @@ import type { Technology } from "../types/technology";
 
 export const technologies: Technology[] = [
   {
-    id: "html",
-    name: "HTML",
+    id: "html5",
+    name: "HTML5",
   },
   {
-    id: "css",
-    name: "CSS",
+    id: "css3",
+    name: "CSS3",
   },
   {
     id: "responsive-design",
@@ -126,7 +126,71 @@ export const technologies: Technology[] = [
     name: "Styled-components",
   },
   {
-    id: "bootstrap",
-    name: "Bootstrap",
+    id: "nodejs",
+    name: "Node.js",
+  },
+  {
+    id: "swagger",
+    name: "Swagger",
+  },
+  {
+    id: "postman",
+    name: "Postman",
+  },
+  {
+    id: "figma",
+    name: "Figma",
+  },
+  {
+    id: "github-copilot",
+    name: "GitHub Copilot",
+  },
+  {
+    id: "ffmpeg",
+    name: "FFmpeg",
+  },
+  {
+    id: "obs-studio",
+    name: "OBS Studio",
+  },
+  {
+    id: "agile",
+    name: "Agile",
+  },
+  {
+    id: "scrum",
+    name: "Scrum",
+  },
+  {
+    id: "kanban",
+    name: "Kanban",
+  },
+  {
+    id: "jwt",
+    name: "JWT",
+  },
+  {
+    id: "mongodb",
+    name: "MongoDB",
+  },
+  {
+    id: "zustand",
+    name: "Zustand",
+  },
+  {
+    id: "wcag",
+    name: "WCAG 2.1",
+  },
+  {
+    id: "core-web-vitals",
+    name: "Core Web Vitals",
+  },
+  {
+    id: "green-code",
+    name: "Green Code",
+  },
+  {
+    id: "seo-technique",
+    name: "SEO Technique",
   },
 ];
