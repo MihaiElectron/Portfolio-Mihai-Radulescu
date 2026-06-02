@@ -8,6 +8,7 @@ import type { TechnologyCategory } from "../../types/technology-category";
 interface TerminalTechPanelProps {
   category: TechnologyCategory;
   technologies: (Technology | undefined)[];
+  onTechnologySelect: (technologyId: string) => void;
 }
 
 const ITEMS_PER_PAGE = 15;
@@ -15,6 +16,7 @@ const ITEMS_PER_PAGE = 15;
 export default function TerminalTechPanel({
   category,
   technologies,
+  onTechnologySelect,
 }: TerminalTechPanelProps) {
   const [page, setPage] = useState(0);
 
@@ -50,11 +52,7 @@ export default function TerminalTechPanel({
 
     window.history.pushState({}, "", url);
 
-    window.dispatchEvent(
-      new CustomEvent("terminal-tech-filter", {
-        detail: technologyId,
-      })
-    );
+    onTechnologySelect(technologyId);
 
     document.getElementById("destinations")?.scrollIntoView({
       behavior: "smooth",
