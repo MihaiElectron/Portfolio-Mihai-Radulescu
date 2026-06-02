@@ -12,7 +12,11 @@ import type { Project } from "@/types/project";
 import type { GithubStatus } from "@/types/github-status";
 
 async function getProjects(): Promise<Project[]> {
-  const res = await fetch("http://localhost:3000/api/projects", {
+  const baseUrl = process.env.VERCEL_URL
+    ? `https://${process.env.VERCEL_URL}`
+    : "http://localhost:3000";
+
+  const res = await fetch(`${baseUrl}/api/projects`, {
     cache: "no-store",
   });
 

@@ -14,6 +14,10 @@ export const technologyCategories: TechnologyCategory[] = [
       "typescript",
       "react",
       "nextjs",
+      "vite",
+      "tailwind",
+      "styled-components",
+      "bootstrap",
     ],
   },
   {

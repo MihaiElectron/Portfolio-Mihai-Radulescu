@@ -113,4 +113,20 @@ export const technologies: Technology[] = [
     id: "vercel",
     name: "Vercel",
   },
+  {
+    id: "vite",
+    name: "Vite",
+  },
+  {
+    id: "tailwind",
+    name: "Tailwind",
+  },
+  {
+    id: "styled-components",
+    name: "Styled-components",
+  },
+  {
+    id: "bootstrap",
+    name: "Bootstrap",
+  },
 ];
