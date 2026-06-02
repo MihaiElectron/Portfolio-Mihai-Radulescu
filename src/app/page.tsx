@@ -12,13 +12,14 @@ import type { Project } from "@/types/project";
 import type { GithubStatus } from "@/types/github-status";
 
 async function getProjects(): Promise<Project[]> {
-  const baseUrl = process.env.VERCEL_URL
-    ? `https://${process.env.VERCEL_URL}`
-    : "http://localhost:3000";
+  const baseUrl =
+    process.env.NODE_ENV === "production"
+      ? "https://portfolio-mihai-radulescu.vercel.app"
+      : "http://localhost:3000";
 
   const res = await fetch(`${baseUrl}/api/projects`, {
     cache: "no-store",
-  }); 
+  });
 
   if (!res.ok) {
     throw new Error("Erreur lors du chargement des projets GitHub");
