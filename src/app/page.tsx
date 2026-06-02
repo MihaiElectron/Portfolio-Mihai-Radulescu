@@ -18,7 +18,7 @@ async function getProjects(): Promise<Project[]> {
 
   const res = await fetch(`${baseUrl}/api/projects`, {
     cache: "no-store",
-  });
+  }); 
 
   if (!res.ok) {
     throw new Error("Erreur lors du chargement des projets GitHub");
