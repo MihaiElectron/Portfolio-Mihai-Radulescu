@@ -170,21 +170,21 @@ export const projectDetails: Record<string, ProjectDetails> = {
       "Les livrables pourraient être enrichis par la modélisation UML, la mise en place d’une roadmap produit détaillée et une estimation budgétaire plus précise des différentes phases du projet.",
   },
 
-  "portfolio": {
+  "portfolio-mihai-radulescu": {
     video: {
       webm: "/projects/portfolio.webm",
       mp4: "/projects/portfolio.mp4",
     },
     context:
-      "",
+      "Ce projet de fin de parcours consistait à concevoir, développer et déployer un portfolio professionnel afin de valoriser les compétences acquises tout au long de la formation et présenter les réalisations les plus significatives à des recruteurs ou clients potentiels.",
     objectives:
-      "",
+      "L’objectif était de créer une vitrine professionnelle moderne, responsive, accessible et performante, regroupant une présentation personnelle, les projets réalisés, les compétences techniques acquises et les moyens de contact.",
     skills:
-      "",
+      "J’ai consolidé mes compétences en architecture front-end moderne, typage TypeScript, optimisation des performances, déploiement continu, gestion de médias web et conception d’une expérience utilisateur cohérente sur tous les supports.",
     results:
-      "",
+      "Le portfolio est entièrement responsive, déployé en ligne sur Vercel, optimisé pour les performances et met en valeur l’ensemble des projets, compétences et méthodologies acquises durant le parcours OpenClassrooms.",
     improvements:
-      "",
+      "Le portfolio pourra être enrichi progressivement avec de nouveaux projets professionnels, des études de cas plus détaillées, des démonstrations interactives et des contributions open source pertinentes.",
   },
   
 };
