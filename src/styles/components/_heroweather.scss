@@ -169,7 +169,7 @@
     color: abs.$color-title-amber;
   }
 
-  @media screen and (max-width: 900px) {
-    min-height: 420px;
+  @media screen and (max-width: 1200px) {
+    display: none;
   }
 }
