@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 
 import type { Project } from "../../types/project";
 import type { GithubStatus } from "../../types/github-status";
@@ -10,21 +10,15 @@ import DestinationCard from "./DestinationCard";
 interface DestinationsProps {
   projects: Project[];
   githubStatus: GithubStatus;
-}
-
-function getInitialTechnologyFilter() {
-  if (typeof window === "undefined") return null;
-
-  return new URLSearchParams(window.location.search).get("tech");
+  initialTechnology: string | null;
 }
 
 export default function Destinations({
   projects,
   githubStatus,
+  initialTechnology,
 }: DestinationsProps) {
-  const [activeTechnology, setActiveTechnology] = useState<string | null>(() =>
-    getInitialTechnologyFilter()
-  );
+  const activeTechnology = initialTechnology;
 
   const [selectedProjectName, setSelectedProjectName] = useState<string | null>(
     null
@@ -35,22 +29,6 @@ export default function Destinations({
   );
 
   const [scrollPosition, setScrollPosition] = useState(0);
-
-  useEffect(() => {
-    const handleTechFilter = (event: Event) => {
-      const customEvent = event as CustomEvent<string>;
-
-      setActiveTechnology(customEvent.detail);
-      setSelectedProjectName(null);
-      setClosingProjectName(null);
-    };
-
-    window.addEventListener("terminal-tech-filter", handleTechFilter);
-
-    return () => {
-      window.removeEventListener("terminal-tech-filter", handleTechFilter);
-    };
-  }, []);
 
   const filteredProjects = useMemo(() => {
     if (!activeTechnology) return projects;
@@ -95,7 +73,9 @@ export default function Destinations({
     }, 460);
   }
 
-  function clearFilter() {
+  function clearFilter(event: React.MouseEvent<HTMLButtonElement>) {
+    event.stopPropagation();
+
     const url = new URL(window.location.href);
 
     url.searchParams.delete("tech");
@@ -103,7 +83,6 @@ export default function Destinations({
 
     window.history.pushState({}, "", url);
 
-    setActiveTechnology(null);
     setSelectedProjectName(null);
     setClosingProjectName(null);
 

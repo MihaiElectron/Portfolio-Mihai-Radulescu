@@ -23,7 +23,7 @@ export default function TerminalMap({
   technologies,
 }: TerminalMapProps) {
   return (
-    <div className="terminal-map" >
+    <div className="terminal-map">
       <div className="terminal-map__display">
         {category ? (
           <p key={category.id} className="terminal-map__display-text">
@@ -50,13 +50,13 @@ export default function TerminalMap({
           priority
         />
 
-        {category && (
+        {category ? (
           <TerminalTechPanel
             key={category.id}
             category={category}
             technologies={technologies}
           />
-        )}
+        ) : null}
 
         <div
           className={`terminal-map__zones ${

@@ -1,14 +1,14 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { useRouter } from "next/navigation";
 
 import type { Technology } from "../../types/technology";
 import type { TechnologyCategory } from "../../types/technology-category";
 
 interface TerminalTechPanelProps {
-  category: TechnologyCategory;
+  category: TechnologyCategory | undefined;
   technologies: (Technology | undefined)[];
-  onTechnologySelect: (technologyId: string) => void;
 }
 
 const ITEMS_PER_PAGE = 15;
@@ -16,8 +16,8 @@ const ITEMS_PER_PAGE = 15;
 export default function TerminalTechPanel({
   category,
   technologies,
-  onTechnologySelect,
 }: TerminalTechPanelProps) {
+  const router = useRouter();
   const [page, setPage] = useState(0);
 
   const cleanTechnologies = technologies.filter(
@@ -44,18 +44,22 @@ export default function TerminalTechPanel({
     return () => clearInterval(interval);
   }, [pages.length]);
 
+  if (!category) return null;
+
   function handleTechnologyClick(technologyId: string) {
     const url = new URL(window.location.href);
 
     url.searchParams.set("tech", technologyId);
     url.hash = "destinations";
 
-    window.history.pushState({}, "", url);
+    router.push(`${url.pathname}${url.search}${url.hash}`, {
+      scroll: false,
+    });
 
-    onTechnologySelect(technologyId);
-
-    document.getElementById("destinations")?.scrollIntoView({
-      behavior: "smooth",
+    requestAnimationFrame(() => {
+      document.getElementById("destinations")?.scrollIntoView({
+        behavior: "smooth",
+      });
     });
   }
 

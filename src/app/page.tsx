@@ -11,6 +11,12 @@ import { technologies } from "@/data/technologies";
 import type { Project } from "@/types/project";
 import type { GithubStatus } from "@/types/github-status";
 
+interface HomeProps {
+  searchParams: Promise<{
+    tech?: string;
+  }>;
+}
+
 async function getProjects(): Promise<Project[]> {
   const baseUrl =
     process.env.NODE_ENV === "production"
@@ -28,7 +34,10 @@ async function getProjects(): Promise<Project[]> {
   return res.json();
 }
 
-export default async function Home() {
+export default async function Home({ searchParams }: HomeProps) {
+  const params = await searchParams;
+  const initialTechnology = params.tech ?? null;
+
   let projects: Project[] = [];
   let githubStatus: GithubStatus = "OPERATIONAL";
 
@@ -48,7 +57,11 @@ export default async function Home() {
       <Hero />
       <Departures />
       <CheckIn stats={stats} />
-      <Destinations projects={projects} githubStatus={githubStatus} />
+      <Destinations
+        projects={projects}
+        githubStatus={githubStatus}
+        initialTechnology={initialTechnology}
+      />
       <GithubActivity />
       <FinalCall />
       <Footer githubStatus={githubStatus} />
