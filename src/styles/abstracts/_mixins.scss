@@ -1,4 +1,6 @@
 // Mixins SCSS
+@use "variables" as *;
+
 @mixin button-base {
   display: inline-flex;
   align-items: center;
@@ -17,4 +19,35 @@
     background-color 0.2s ease,
     border-color 0.2s ease,
     color 0.2s ease;
+}
+
+@mixin section-container {
+  max-width: $container-max-width;
+  margin: 0 auto;
+  padding: 0;
+}
+
+@mixin section-container-responsive {
+  @include section-container;
+
+  @media screen and (max-width: $breakpoint-tablet) {
+    max-width: $container-tablet-max-width;
+    padding: 0 $container-padding-tablet;
+  }
+
+  @media screen and (max-width: $breakpoint-mobile) {
+    padding: 0 $container-padding-mobile;
+  }
+}
+
+@mixin tablet-down {
+  @media screen and (max-width: $breakpoint-tablet) {
+    @content;
+  }
+}
+
+@mixin mobile-down {
+  @media screen and (max-width: $breakpoint-mobile) {
+    @content;
+  }
 }
