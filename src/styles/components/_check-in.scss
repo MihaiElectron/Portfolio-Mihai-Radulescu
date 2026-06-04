@@ -6,9 +6,7 @@
   color: abs.$color-text;
 
   &__content {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 0;
+    @include abs.section-container-responsive;
   }
 
   &__eyebrow {
@@ -247,12 +245,24 @@
     }
   }
 
-  @media screen and (max-width: 900px) {
+  @include abs.tablet-down {
+    &__eyebrow,
+    &__title {
+      text-align: center;
+    }
+
+    &__title {
+      font-size: clamp(2.25rem, 6vw, 3rem);
+    }
+
     &__layout {
       grid-template-columns: 1fr;
+      justify-items: center;
     }
 
     &__pass {
+      width: 100%;
+      max-width: 820px;
       grid-template-columns: 1fr;
     }
 
@@ -266,7 +276,122 @@
     }
 
     &__stats {
+      display: none;
+    }
+  }
+
+  @include abs.mobile-down {
+    padding: 56px 0 32px;
+
+    &__eyebrow {
+      letter-spacing: 2.4px;
+      line-height: 1.5;
+    }
+
+    &__title {
+      margin-bottom: 28px;
+      font-size: clamp(1.9rem, 10vw, 2.65rem);
+      letter-spacing: 1px;
+    }
+
+    &__pass {
+      width: 100%;
+      overflow: hidden;
+    }
+
+    &__pass-main {
+      padding: 20px 18px 22px;
+    }
+
+    &__pass-header,
+    &__pass-footer {
+      gap: 10px;
+      font-size: 0.58rem;
+      letter-spacing: 1.6px;
+      line-height: 1.4;
+    }
+
+    &__pass-header {
+      flex-direction: column;
+      align-items: flex-start;
+      padding-bottom: 14px;
+    }
+
+    &__route {
       grid-template-columns: 1fr;
+      gap: 16px;
+      margin-top: 18px;
+
+      div {
+        gap: 5px;
+      }
+
+      span {
+        font-size: 0.62rem;
+        letter-spacing: 2px;
+      }
+
+      strong {
+        font-size: clamp(1.05rem, 6vw, 1.45rem);
+        line-height: 1.15;
+      }
+    }
+
+    &__bio {
+      max-width: none;
+      margin: 24px 0;
+      font-size: 0.78rem;
+      line-height: 1.65;
+    }
+
+    &__pass-footer {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+
+      span:first-child {
+        grid-column: 1 / -1;
+      }
+    }
+
+    &__stub {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 12px;
+      padding: 18px;
+
+      div:first-of-type {
+        margin-top: 0;
+      }
+
+      span {
+        font-size: 0.6rem;
+        letter-spacing: 2px;
+      }
+
+      strong {
+        font-size: 2rem;
+      }
+
+      small {
+        font-size: 0.6rem;
+        letter-spacing: 1.5px;
+        text-align: right;
+      }
+    }
+
+    &__stamp {
+      position: static;
+      justify-self: start;
+      padding: 5px 9px;
+      font-size: 0.58rem !important;
+      letter-spacing: 1.4px !important;
+      transform: rotate(-6deg);
+    }
+
+    &__barcode {
+      width: 42px;
+      height: 54px;
     }
   }
 }
