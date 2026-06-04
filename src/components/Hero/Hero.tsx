@@ -24,7 +24,9 @@ export default function Hero() {
           <div className="hero__left">
             <p className="hero__flight">
               <span className="hero__flight-dot"></span>
-              Vol n° JS-2026 · Embarquement immédiat
+              <span className="hero__flight-number">Vol n° JS-2026</span>
+              <span className="hero__flight-separator">·</span>
+              <span className="hero__flight-status">Embarquement immédiat</span>
             </p>
 
             <h1 className="hero__welcome">
