@@ -112,6 +112,10 @@
       padding: 0 32px;
     }
 
+    &__right {
+      display: none;
+    }
+
     &__left {
       width: 100%;
     }
@@ -135,7 +139,7 @@
   }
 
   @media screen and (max-width: 768px) {
-    padding: 56px 0;
+    padding: 56px 0 32px;
 
     &__content {
       padding: 0 24px;
