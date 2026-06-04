@@ -6,9 +6,7 @@
   color: abs.$color-text;
 
   &__content {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 0;
+    @include abs.section-container-responsive;
   }
 
   &__header {
@@ -52,14 +50,47 @@
     gap: 24px;
   }
 
-  @media screen and (max-width: 900px) {
+  @include abs.tablet-down {
     &__header {
       flex-direction: column;
-      align-items: flex-start;
+      align-items: center;
+      text-align: center;
+    }
+
+    &__title {
+      font-size: clamp(2.25rem, 6vw, 3rem);
+    }
+
+    &__meta {
+      text-align: center;
     }
 
     &__grid {
       grid-template-columns: 1fr;
+    }
+  }
+
+  @include abs.mobile-down {
+    padding: 56px 0 32px;
+
+    &__header {
+      gap: 18px;
+      margin-bottom: 24px;
+    }
+
+    &__eyebrow,
+    &__meta {
+      letter-spacing: 2.4px;
+      line-height: 1.5;
+    }
+
+    &__title {
+      font-size: clamp(2rem, 11vw, 2.75rem);
+      letter-spacing: 1px;
+    }
+
+    &__grid {
+      gap: 18px;
     }
   }
 
@@ -109,6 +140,32 @@
       background-color: abs.$color-title-amber;
       color: abs.$color-secondary-background;
       transform: translateY(-2px);
+    }
+  }
+
+  @include abs.tablet-down {
+    &__filter {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+  }
+
+  @include abs.mobile-down {
+    &__filter {
+      gap: 14px;
+      padding: 14px;
+
+      span {
+        letter-spacing: 2px;
+        line-height: 1.5;
+      }
+    }
+
+    &__filter-button {
+      width: 100%;
+      box-sizing: border-box;
+      letter-spacing: 2px;
     }
   }
 }
