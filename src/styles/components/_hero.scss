@@ -136,7 +136,7 @@
   }
 
   @media screen and (max-width: 768px) {
-    padding: 56px 0 32px;
+    padding: abs.$section-padding-mobile-top 0 abs.$section-padding-mobile-bottom;
 
     &__content {
       padding: 0 abs.$container-padding-mobile;

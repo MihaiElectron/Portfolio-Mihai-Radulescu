@@ -6,9 +6,7 @@
   color: abs.$color-text;
 
   &__content {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 0;
+    @include abs.section-container-responsive;
   }
 
   &__panel {
@@ -103,22 +101,86 @@
     }
   }
 
-  @media screen and (max-width: 900px) {
+  @include abs.tablet-down {
     &__panel {
       grid-template-columns: 1fr;
       padding: 32px;
       gap: 48px;
+      text-align: center;
     }
 
     &__title {
-      font-size: 3rem;
+      font-size: clamp(3rem, 8vw, 4rem);
+    }
+
+    &__description {
+      margin-inline: auto;
+    }
+
+    &__right {
+      width: 100%;
+      max-width: 620px;
+      margin: 0 auto;
     }
 
     &__row {
       grid-template-columns: 1fr;
+      gap: 10px;
 
       strong {
-        text-align: left;
+        text-align: center;
+      }
+    }
+  }
+
+  @include abs.mobile-down {
+    padding: abs.$section-padding-mobile-top 0 abs.$section-padding-mobile-bottom;
+
+    &__panel {
+      width: 98vw;
+      max-width: 98vw;
+      box-sizing: border-box;
+      gap: 32px;
+      margin-left: 50%;
+      padding: 34px 20px;
+
+      transform: translateX(-50%);
+    }
+
+    &__eyebrow {
+      margin-bottom: 16px;
+      font-size: abs.$fs-xs;
+      letter-spacing: 2.4px;
+      line-height: 1.5;
+    }
+
+    &__title {
+      font-size: clamp(2.75rem, 13vw, 3.6rem);
+      letter-spacing: -1px;
+    }
+
+    &__description {
+      margin-top: 24px;
+      font-size: 0.78rem;
+      line-height: 1.65;
+    }
+
+    &__right {
+      max-width: none;
+    }
+
+    &__row {
+      padding: 18px 0;
+
+      span {
+        font-size: 0.62rem;
+        letter-spacing: 2px;
+      }
+
+      strong {
+        overflow-wrap: anywhere;
+        font-size: abs.$fs-sm;
+        line-height: 1.4;
       }
     }
   }

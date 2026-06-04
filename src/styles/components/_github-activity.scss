@@ -92,7 +92,7 @@
   }
 
   @include abs.mobile-down {
-    padding: 56px 0 32px;
+    padding: abs.$section-padding-mobile-top 0 abs.$section-padding-mobile-bottom;
 
     &__header {
       gap: 18px;
