@@ -14,20 +14,52 @@ const navLinks = [
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  function scrollToElement(sectionId: string) {
+    const section = document.getElementById(sectionId);
+
+    if (!section) return;
+
+    const isMobile = window.matchMedia("(max-width: 768px)").matches;
+
+    if (isMobile) {
+      const navbarHeight =
+        document.querySelector<HTMLElement>(".navbar")?.offsetHeight ?? 0;
+
+      window.scrollTo({
+        top: section.offsetTop - navbarHeight,
+        behavior: "smooth",
+      });
+
+      window.history.pushState(null, "", `#${sectionId}`);
+      return;
+    }
+
+    section.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+
+    window.history.pushState(null, "", `#${sectionId}`);
+  }
+
   function scrollToSection(
     event: React.MouseEvent<HTMLAnchorElement>,
     sectionId: string
   ) {
     event.preventDefault();
 
+    if (!isMenuOpen) {
+      scrollToElement(sectionId);
+      return;
+    }
+
     setIsMenuOpen(false);
 
-    document.getElementById(sectionId)?.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        scrollToElement(sectionId);
+      });
     });
-
-    window.history.pushState(null, "", `#${sectionId}`);
   }
 
   return (
