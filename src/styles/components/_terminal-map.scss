@@ -98,6 +98,7 @@
       left 1.4s cubic-bezier(0.16, 1, 0.3, 1),
       top 1.4s cubic-bezier(0.16, 1, 0.3, 1),
       transform 1.4s cubic-bezier(0.16, 1, 0.3, 1),
+      border-radius 1.4s cubic-bezier(0.16, 1, 0.3, 1),
       border-color 0.25s ease,
       background-color 0.25s ease,
       color 0.25s ease;
@@ -268,10 +269,27 @@
       top: 78%;
     }
 
+    &__zone--a {
+      border-top-left-radius: 18px;
+    }
+
+    &__zone--d {
+      border-top-right-radius: 18px;
+    }
+
+    &__zone--f {
+      border-bottom-right-radius: 18px;
+    }
+
+    &__zone--c {
+      border-bottom-left-radius: 18px;
+    }
+
     &__visual--selected {
       .terminal-map__zone {
         top: auto;
         bottom: 12px;
+        border-radius: 0;
       }
 
       .terminal-map__zone--a,
