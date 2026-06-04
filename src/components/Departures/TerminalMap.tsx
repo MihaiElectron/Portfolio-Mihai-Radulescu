@@ -11,6 +11,7 @@ interface TerminalMapProps {
   activeCategoryId: string | null;
   onSelectCategory: (categoryId: string) => void;
   onClosePanel: () => void;
+  onSelectTechnology: (technologyId: string, categoryId: string) => void;
   category: TechnologyCategory | undefined;
   technologies: (Technology | undefined)[];
 }
@@ -19,6 +20,7 @@ export default function TerminalMap({
   activeCategoryId,
   onSelectCategory,
   onClosePanel,
+  onSelectTechnology,
   category,
   technologies,
 }: TerminalMapProps) {
@@ -55,6 +57,7 @@ export default function TerminalMap({
             key={category.id}
             category={category}
             technologies={technologies}
+            onSelectTechnology={onSelectTechnology}
           />
         ) : null}
 

@@ -1,16 +1,25 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 import TerminalMap from "./TerminalMap";
 
 import { technologyCategories } from "../../data/technology-categories";
 import { technologies } from "../../data/technologies";
 
-export default function Departures() {
-  const [selectedCategoryId, setSelectedCategoryId] = useState<string | null>(
-    null
-  );
+interface DeparturesProps {
+  selectedCategoryId: string | null;
+  onSelectCategory: (categoryId: string) => void;
+  onClosePanel: () => void;
+  onSelectTechnology: (technologyId: string, categoryId: string) => void;
+}
+
+export default function Departures({
+  selectedCategoryId,
+  onSelectCategory,
+  onClosePanel,
+  onSelectTechnology,
+}: DeparturesProps) {
 
   const selectedCategory = technologyCategories.find(
     (category) => category.id === selectedCategoryId
@@ -29,8 +38,10 @@ export default function Departures() {
     const closeOnOutsideClick = (event: MouseEvent) => {
       const target = event.target as HTMLElement;
 
+      if (target.closest(".destinations__filter-button")) return;
+
       if (!target.closest(".terminal-map")) {
-        setSelectedCategoryId(null);
+        onClosePanel();
       }
     };
 
@@ -39,7 +50,7 @@ export default function Departures() {
     return () => {
       document.removeEventListener("click", closeOnOutsideClick);
     };
-  }, [selectedCategoryId]);
+  }, [onClosePanel, selectedCategoryId]);
 
   return (
     <section className="departures section-separator" id="depart">
@@ -60,8 +71,9 @@ export default function Departures() {
 
         <TerminalMap
           activeCategoryId={selectedCategoryId}
-          onSelectCategory={setSelectedCategoryId}
-          onClosePanel={() => setSelectedCategoryId(null)}
+          onSelectCategory={onSelectCategory}
+          onClosePanel={onClosePanel}
+          onSelectTechnology={onSelectTechnology}
           category={selectedCategory}
           technologies={selectedTechnologies}
         />

@@ -10,16 +10,16 @@ import DestinationCard from "./DestinationCard";
 interface DestinationsProps {
   projects: Project[];
   githubStatus: GithubStatus;
-  initialTechnology: string | null;
+  activeTechnology: string | null;
+  onClearTechnologyFilter: () => void;
 }
 
 export default function Destinations({
   projects,
   githubStatus,
-  initialTechnology,
+  activeTechnology,
+  onClearTechnologyFilter,
 }: DestinationsProps) {
-  const activeTechnology = initialTechnology;
-
   const [selectedProjectName, setSelectedProjectName] = useState<string | null>(
     null
   );
@@ -75,20 +75,9 @@ export default function Destinations({
 
   function clearFilter(event: React.MouseEvent<HTMLButtonElement>) {
     event.stopPropagation();
-
-    const url = new URL(window.location.href);
-
-    url.searchParams.delete("tech");
-    url.hash = "depart";
-
-    window.history.pushState({}, "", url);
-
     setSelectedProjectName(null);
     setClosingProjectName(null);
-
-    document.getElementById("depart")?.scrollIntoView({
-      behavior: "smooth",
-    });
+    onClearTechnologyFilter();
   }
 
   return (

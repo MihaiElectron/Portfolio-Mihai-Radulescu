@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { useRouter } from "next/navigation";
 
 import type { Technology } from "../../types/technology";
 import type { TechnologyCategory } from "../../types/technology-category";
@@ -9,6 +8,7 @@ import type { TechnologyCategory } from "../../types/technology-category";
 interface TerminalTechPanelProps {
   category: TechnologyCategory | undefined;
   technologies: (Technology | undefined)[];
+  onSelectTechnology: (technologyId: string, categoryId: string) => void;
 }
 
 const ITEMS_PER_PAGE = 15;
@@ -16,8 +16,8 @@ const ITEMS_PER_PAGE = 15;
 export default function TerminalTechPanel({
   category,
   technologies,
+  onSelectTechnology,
 }: TerminalTechPanelProps) {
-  const router = useRouter();
   const [page, setPage] = useState(0);
 
   const cleanTechnologies = technologies.filter(
@@ -47,20 +47,9 @@ export default function TerminalTechPanel({
   if (!category) return null;
 
   function handleTechnologyClick(technologyId: string) {
-    const url = new URL(window.location.href);
+    if (!category) return;
 
-    url.searchParams.set("tech", technologyId);
-    url.hash = "destinations";
-
-    router.push(`${url.pathname}${url.search}${url.hash}`, {
-      scroll: false,
-    });
-
-    requestAnimationFrame(() => {
-      document.getElementById("destinations")?.scrollIntoView({
-        behavior: "smooth",
-      });
-    });
+    onSelectTechnology(technologyId, category.id);
   }
 
   return (

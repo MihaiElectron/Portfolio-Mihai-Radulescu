@@ -1,7 +1,6 @@
 import Hero from "@/components/Hero/Hero";
-import Departures from "@/components/Departures/Departures";
 import CheckIn from "@/components/CheckIn/CheckIn";
-import Destinations from "@/components/Destinations/Destinations";
+import TerminalJourney from "@/components/TerminalJourney/TerminalJourney";
 import GithubActivity from "@/components/GithubActivity/GithubActivity";
 import FinalCall from "@/components/FinalCall/FinalCall";
 import Footer from "@/components/Footer/Footer";
@@ -14,6 +13,7 @@ import type { GithubStatus } from "@/types/github-status";
 interface HomeProps {
   searchParams: Promise<{
     tech?: string;
+    terminal?: string;
   }>;
 }
 
@@ -37,6 +37,7 @@ async function getProjects(): Promise<Project[]> {
 export default async function Home({ searchParams }: HomeProps) {
   const params = await searchParams;
   const initialTechnology = params.tech ?? null;
+  const initialTerminal = params.terminal ?? null;
 
   let projects: Project[] = [];
   let githubStatus: GithubStatus = "OPERATIONAL";
@@ -55,12 +56,12 @@ export default async function Home({ searchParams }: HomeProps) {
   return (
     <main>
       <Hero />
-      <Departures />
       <CheckIn stats={stats} />
-      <Destinations
+      <TerminalJourney
         projects={projects}
         githubStatus={githubStatus}
         initialTechnology={initialTechnology}
+        initialTerminal={initialTerminal}
       />
       <GithubActivity />
       <FinalCall />
