@@ -9,6 +9,12 @@ interface WeatherData {
   weathercode: number;
 }
 
+interface IpApiData {
+  city?: string;
+  latitude?: number;
+  longitude?: number;
+}
+
 interface TimeData {
   hours: string;
   minutes: string;
@@ -25,12 +31,14 @@ export default function HeroWeather() {
   });
 
   function getWeatherLabel(code: number) {
+    if (code === -1) return "OFFLINE";
     if (code === 0 || code === 1) return "CLEAR";
     if (code === 2) return "PARTLY";
     if (code === 3) return "CLOUDY";
     if ([45, 48].includes(code)) return "FOG";
     if ([51, 53, 55, 61, 63, 65].includes(code)) return "RAIN";
     if ([71, 73, 75].includes(code)) return "SNOW";
+    
 
     return "UNKNOWN";
   }
@@ -39,24 +47,43 @@ export default function HeroWeather() {
     async function loadWeather() {
       try {
         const ipRes = await fetch("https://ipapi.co/json/");
-        const ipData = await ipRes.json();
 
-        const { city, latitude, longitude } = ipData;
+        if (!ipRes.ok) {
+          throw new Error("Localisation indisponible");
+        }
 
-        const meteoRes = await fetch(
-          `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true`
+        const ipData = (await ipRes.json()) as IpApiData;
+
+        const city = ipData.city ?? "LOCAL";
+        const latitude = ipData.latitude;
+        const longitude = ipData.longitude;
+
+        if (!latitude || !longitude) {
+          throw new Error("Coordonnées GPS indisponibles");
+        }
+
+        const weatherRes = await fetch(
+          `/api/weather?city=${encodeURIComponent(
+            city
+          )}&latitude=${latitude}&longitude=${longitude}`
         );
 
-        const meteoData = await meteoRes.json();
+        if (!weatherRes.ok) {
+          throw new Error("Météo indisponible");
+        }
 
-        setWeather({
-          city,
-          temperature: meteoData.current_weather.temperature,
-          windspeed: meteoData.current_weather.windspeed,
-          weathercode: meteoData.current_weather.weathercode,
-        });
+        const weatherData = (await weatherRes.json()) as WeatherData;
+
+        setWeather(weatherData);
       } catch (error) {
         console.error("Erreur météo :", error);
+
+        setWeather({
+          city: "METEO OFFLINE",
+          temperature: 0,
+          windspeed: 0,
+          weathercode: -1,
+        });
       }
     }
 
