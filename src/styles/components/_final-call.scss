@@ -34,13 +34,16 @@
   &__title {
     margin: 0;
 
+    text-align: left;
+
     font-family: abs.$font-plexmono;
     font-size: 4rem;
-    font-weight: abs.$mono-semibold;
+    font-weight: abs.$mono-regular;
     line-height: 0.95;
     text-transform: uppercase;
 
     color: abs.$color-title-amber;
+    -webkit-text-fill-color: abs.$color-title-amber;
 
     text-shadow:
       0 0 8px rgba(249, 170, 10, 0.5),
@@ -57,6 +60,7 @@
     line-height: 1.7;
 
     color: abs.$color-title-amber;
+    -webkit-text-fill-color: abs.$color-title-amber;
   }
 
   &__right {
@@ -76,6 +80,8 @@
     border-bottom: 1px solid rgba(249, 170, 10, 0.25);
 
     text-decoration: none;
+    color: abs.$color-title-amber;
+    -webkit-text-fill-color: abs.$color-title-amber;
 
     span {
       font-family: abs.$font-plexmono;
@@ -84,6 +90,7 @@
       text-transform: uppercase;
 
       color: abs.$color-title-amber;
+      -webkit-text-fill-color: abs.$color-title-amber;
       opacity: 0.7;
     }
 
@@ -93,11 +100,19 @@
       font-weight: abs.$mono-semibold;
 
       color: abs.$color-title-amber;
+      -webkit-text-fill-color: abs.$color-title-amber;
       text-align: right;
+    }
+
+    &:visited,
+    &:active {
+      color: abs.$color-title-amber;
+      -webkit-text-fill-color: abs.$color-title-amber;
     }
 
     &:hover strong {
       color: abs.$color-title;
+      -webkit-text-fill-color: abs.$color-title;
     }
   }
 
@@ -109,12 +124,28 @@
       text-align: center;
     }
 
+    &__left {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    &__eyebrow {
+      width: 100%;
+      text-align: center;
+    }
+
     &__title {
+      width: 100%;
       font-size: clamp(3rem, 8vw, 4rem);
+      text-align: center;
     }
 
     &__description {
+      width: 100%;
       margin-inline: auto;
+      text-align: center;
     }
 
     &__right {
@@ -155,8 +186,11 @@
     }
 
     &__title {
-      font-size: clamp(2.75rem, 13vw, 3.6rem);
-      letter-spacing: -1px;
+      max-width: 100%;
+      font-size: clamp(2.35rem, 11.2vw, 3.2rem);
+      letter-spacing: -2px;
+      line-height: 1.05;
+      overflow-wrap: normal;
     }
 
     &__description {
