@@ -21,6 +21,12 @@ interface TimeData {
   seconds: string;
 }
 
+const DEFAULT_LOCATION = {
+  city: "PARIS",
+  latitude: 48.8566,
+  longitude: 2.3522,
+};
+
 export default function HeroWeather() {
   const [weather, setWeather] = useState<WeatherData | null>(null);
 
@@ -38,7 +44,6 @@ export default function HeroWeather() {
     if ([45, 48].includes(code)) return "FOG";
     if ([51, 53, 55, 61, 63, 65].includes(code)) return "RAIN";
     if ([71, 73, 75].includes(code)) return "SNOW";
-    
 
     return "UNKNOWN";
   }
@@ -46,20 +51,22 @@ export default function HeroWeather() {
   useEffect(() => {
     async function loadWeather() {
       try {
-        const ipRes = await fetch("https://ipapi.co/json/");
+        let city = DEFAULT_LOCATION.city;
+        let latitude = DEFAULT_LOCATION.latitude;
+        let longitude = DEFAULT_LOCATION.longitude;
 
-        if (!ipRes.ok) {
-          throw new Error("Localisation indisponible");
-        }
+        try {
+          const ipRes = await fetch("https://ipapi.co/json/");
 
-        const ipData = (await ipRes.json()) as IpApiData;
+          if (ipRes.ok) {
+            const ipData = (await ipRes.json()) as IpApiData;
 
-        const city = ipData.city ?? "LOCAL";
-        const latitude = ipData.latitude;
-        const longitude = ipData.longitude;
-
-        if (!latitude || !longitude) {
-          throw new Error("Coordonnées GPS indisponibles");
+            city = ipData.city ?? DEFAULT_LOCATION.city;
+            latitude = ipData.latitude ?? DEFAULT_LOCATION.latitude;
+            longitude = ipData.longitude ?? DEFAULT_LOCATION.longitude;
+          }
+        } catch {
+          console.warn("Localisation indisponible, fallback sur Paris.");
         }
 
         const weatherRes = await fetch(
