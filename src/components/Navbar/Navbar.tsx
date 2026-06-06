@@ -63,7 +63,7 @@ export default function Navbar() {
   }
 
   return (
-    <nav className="navbar section-separator">
+    <nav className="navbar section-separator" aria-label="Navigation principale">
       <div className="navbar__left">
         <span className="navbar__badge">T12</span>
 

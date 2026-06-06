@@ -54,18 +54,21 @@ export default async function Home({ searchParams }: HomeProps) {
   };
 
   return (
-    <main>
-      <Hero />
-      <TerminalJourney
-        projects={projects}
-        githubStatus={githubStatus}
-        initialTechnology={initialTechnology}
-        initialTerminal={initialTerminal}
-      />
-      <CheckIn stats={stats} />
-      <GithubActivity />
-      <FinalCall />
+    <>
+      <main id="contenu-principal" aria-label="Contenu principal du portfolio">
+        <Hero />
+        <TerminalJourney
+          projects={projects}
+          githubStatus={githubStatus}
+          initialTechnology={initialTechnology}
+          initialTerminal={initialTerminal}
+        />
+        <CheckIn stats={stats} />
+        <GithubActivity />
+        <FinalCall />
+      </main>
+
       <Footer githubStatus={githubStatus} />
-    </main>
+    </>
   );
 }

@@ -5,5 +5,14 @@
 
 body {
   background-color: abs.$color-primary-background;
+  color: abs.$color-text;
   font-family: abs.$font-plexmono;
+}
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+
+  background-color: abs.$color-primary-background;
 }

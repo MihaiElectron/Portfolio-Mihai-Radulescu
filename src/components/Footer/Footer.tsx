@@ -9,7 +9,7 @@ export default function Footer({ githubStatus }: FooterProps) {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="footer">
+    <footer className="footer" aria-label="Pied de page">
       <div className="footer__content">
         <p className="footer__copyright">
           © {currentYear} TERMINAL 12 · TOUS DROITS DÉCOLLÉS

@@ -27,7 +27,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="fr" className={`${jetbrains.variable} ${plexMono.variable}`}>
       <body>
-        <Navbar />
+        <header className="site-header" aria-label="En-tête du site">
+          <Navbar />
+        </header>
         {children}
       </body>
     </html>
