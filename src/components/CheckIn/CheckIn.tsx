@@ -30,7 +30,7 @@ export default function CheckIn({ stats }: CheckInProps) {
         <h2 className="check-in__title">À propos · Bagage à main</h2>
 
         <div className="check-in__layout">
-          <article className="check-in__pass">
+          <div className="check-in__pass">
             <div className="check-in__pass-main">
               <div className="check-in__pass-header">
                 <span>BOARDING PASS</span>
@@ -81,7 +81,7 @@ export default function CheckIn({ stats }: CheckInProps) {
 
               <small>JS · RDX · TS</small>
             </div>
-          </article>
+          </div>
 
           <div className="check-in__stats">
             <div className="check-in__stat">
