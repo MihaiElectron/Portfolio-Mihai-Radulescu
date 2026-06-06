@@ -56,13 +56,13 @@ export default async function Home({ searchParams }: HomeProps) {
   return (
     <main>
       <Hero />
-      <CheckIn stats={stats} />
       <TerminalJourney
         projects={projects}
         githubStatus={githubStatus}
         initialTechnology={initialTechnology}
         initialTerminal={initialTerminal}
       />
+      <CheckIn stats={stats} />
       <GithubActivity />
       <FinalCall />
       <Footer githubStatus={githubStatus} />
