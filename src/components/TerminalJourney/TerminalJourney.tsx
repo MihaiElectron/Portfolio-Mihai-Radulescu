@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 
+import CheckIn from "../CheckIn/CheckIn";
 import Departures from "../Departures/Departures";
 import Destinations from "../Destinations/Destinations";
 
@@ -11,6 +12,10 @@ import type { Project } from "../../types/project";
 interface TerminalJourneyProps {
   projects: Project[];
   githubStatus: GithubStatus;
+  stats: {
+    projectsCompleted: number;
+    technologiesCount: number;
+  };
   initialTechnology: string | null;
   initialTerminal: string | null;
 }
@@ -18,6 +23,7 @@ interface TerminalJourneyProps {
 export default function TerminalJourney({
   projects,
   githubStatus,
+  stats,
   initialTechnology,
   initialTerminal,
 }: TerminalJourneyProps) {
@@ -72,6 +78,8 @@ export default function TerminalJourney({
         onClosePanel={() => setSelectedCategoryId(null)}
         onSelectTechnology={handleTechnologySelect}
       />
+
+      <CheckIn stats={stats} />
 
       <Destinations
         projects={projects}

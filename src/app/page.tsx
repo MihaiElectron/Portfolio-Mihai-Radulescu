@@ -1,5 +1,4 @@
 import Hero from "@/components/Hero/Hero";
-import CheckIn from "@/components/CheckIn/CheckIn";
 import TerminalJourney from "@/components/TerminalJourney/TerminalJourney";
 import GithubActivity from "@/components/GithubActivity/GithubActivity";
 import FinalCall from "@/components/FinalCall/FinalCall";
@@ -60,10 +59,10 @@ export default async function Home({ searchParams }: HomeProps) {
         <TerminalJourney
           projects={projects}
           githubStatus={githubStatus}
+          stats={stats}
           initialTechnology={initialTechnology}
           initialTerminal={initialTerminal}
         />
-        <CheckIn stats={stats} />
         <GithubActivity />
         <FinalCall />
       </main>
